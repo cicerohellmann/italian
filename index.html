@@ -963,12 +963,14 @@
         <a class="nav-item" data-panel="pronunciation">Fonetica</a>
         <a class="nav-item" data-panel="pronouns">Pronomi</a>
         <a class="nav-item" data-panel="articles">Articoli</a>
+        <a class="nav-item" data-panel="possessives">Possessivi + possesso</a>
         <a class="nav-item" data-panel="colors">Colori</a>
         <a class="nav-item" data-panel="numbers">Numeri</a>
         <a class="nav-item" data-panel="phrases">Frasi utili</a>
       </div>
       <div class="nav-group">
         <div class="nav-group-label"><span class="dot dot-steel"></span>Livello 2 &mdash; Fondamenti</div>
+        <a class="nav-item" data-panel="prepositions">Preposizioni</a>
         <a class="nav-item" data-panel="present-prog">Progressivo: stare + gerundio</a>
         <a class="nav-item" data-panel="essere">Essere</a>
         <a class="nav-item" data-panel="avere">Avere</a>
@@ -1023,6 +1025,11 @@
             <div class="tc-name">Articoli</div>
             <div class="tc-desc">il/lo/la, un/uno/una, plurals</div>
           </a>
+          <a class="topic-card" data-panel="possessives">
+            <div class="tc-level tc-sage"><span class="dot dot-sage"></span>Livello 1</div>
+            <div class="tc-name">Possessivi</div>
+            <div class="tc-desc">mio, tuo, suo + possession with di</div>
+          </a>
           <a class="topic-card" data-panel="colors">
             <div class="tc-level tc-sage"><span class="dot dot-sage"></span>Livello 1</div>
             <div class="tc-name">Colori</div>
@@ -1042,6 +1049,11 @@
             <div class="tc-level tc-steel"><span class="dot dot-steel"></span>Livello 2</div>
             <div class="tc-name">Progressivo</div>
             <div class="tc-desc">stare + gerundio</div>
+          </a>
+          <a class="topic-card" data-panel="prepositions">
+            <div class="tc-level tc-steel"><span class="dot dot-steel"></span>Livello 2</div>
+            <div class="tc-name">Preposizioni</div>
+            <div class="tc-desc">di, a, da, in + articulated forms</div>
           </a>
           <a class="topic-card" data-panel="essere">
             <div class="tc-level tc-steel"><span class="dot dot-steel"></span>Livello 2</div>
@@ -1193,6 +1205,83 @@
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+
+      <!-- ══ POSSESSIVES ══ -->
+      <div class="panel" id="panel-possessives">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>Possessivi + possesso</h2>
+        </div>
+        <div class="card">
+          <h3>Aggettivi possessivi</h3>
+          <p style="color:var(--text-dim);font-size:0.88rem;margin-bottom:8px">The possessive agrees with the thing owned: <em>il mio gatto</em>, <em>la mia macchina</em>, <em>i miei amici</em>, <em>le mie amiche</em>.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>English</th><th>Masch. sing.</th><th>Femm. sing.</th><th>Masch. plur.</th><th>Femm. plur.</th></tr></thead>
+              <tbody>
+                <tr><td>my</td><td>mio</td><td>mia</td><td>miei</td><td>mie</td></tr>
+                <tr><td>your</td><td>tuo</td><td>tua</td><td>tuoi</td><td>tue</td></tr>
+                <tr><td>his / her</td><td>suo</td><td>sua</td><td>suoi</td><td>sue</td></tr>
+                <tr><td>our</td><td>nostro</td><td>nostra</td><td>nostri</td><td>nostre</td></tr>
+                <tr><td>your plural</td><td>vostro</td><td>vostra</td><td>vostri</td><td>vostre</td></tr>
+                <tr><td>their</td><td>loro</td><td>loro</td><td>loro</td><td>loro</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tip"><strong>Shortcut:</strong> match the ending to the noun: <em>gatto mio</em>, <em>macchina mia</em>, <em>amici miei</em>, <em>amiche mie</em>.</div>
+        </div>
+        <div class="card">
+          <h3>Possession with di</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Il gatto di John.</span><span class="label">EN</span><span class="en-text">John's cat.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">La macchina di mia madre.</span><span class="label">EN</span><span class="en-text">My mother's car.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Le macchine dei miei amici.</span><span class="label">EN</span><span class="en-text">My friends' cars.</span></div>
+          <div class="warning"><strong>Pattern:</strong> English uses <em>'s</em>; Italian usually uses <em>di</em>: <em>the car of my mother</em> &rarr; <em>la macchina di mia madre</em>.</div>
+        </div>
+      </div>
+
+      <!-- ══ PREPOSITIONS ══ -->
+      <div class="panel" id="panel-prepositions">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>Preposizioni</h2>
+        </div>
+        <div class="card">
+          <h3>Preposizioni semplici</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Italiano</th><th>English</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>di</td><td>of</td><td>il gatto di John</td></tr>
+                <tr><td>a</td><td>at / to</td><td>vivo a Berlino</td></tr>
+                <tr><td>da</td><td>from / to</td><td>vengo dal Brasile</td></tr>
+                <tr><td>in</td><td>in</td><td>vivo in Germania</td></tr>
+                <tr><td>con</td><td>with</td><td>con i miei amici</td></tr>
+                <tr><td>su</td><td>on / about</td><td>un libro su Roma</td></tr>
+                <tr><td>per</td><td>for / through</td><td>per me va bene</td></tr>
+                <tr><td>tra / fra</td><td>between / among</td><td>tra amici</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Preposizioni articolate: di + articolo</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Articolo</th><th>di + articolo</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>il</td><td>del</td><td>il cane del mio amico</td></tr>
+                <tr><td>lo</td><td>dello</td><td>il nome dello studente</td></tr>
+                <tr><td>la</td><td>della</td><td>il cane della mia amica</td></tr>
+                <tr><td>l'</td><td>dell'</td><td>il libro dell'amico</td></tr>
+                <tr><td>i</td><td>dei</td><td>il cane dei miei amici</td></tr>
+                <tr><td>gli</td><td>degli</td><td>il cane degli studenti</td></tr>
+                <tr><td>le</td><td>delle</td><td>il cane delle mie amiche</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tip"><strong>Ending cue:</strong> <em>il/i &rarr; o</em>, <em>lo/gli &rarr; o</em>, <em>la/le &rarr; a</em>, <em>l' &rarr; o/a</em>.</div>
         </div>
       </div>
 
@@ -1348,6 +1437,12 @@
                 <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-creare' })"><span><span class="word">creare</span><span class="meaning">to create</span></span><span class="target">Exact</span></button>
                 <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-stare' })"><span><span class="word">sto</span><span class="meaning">stare: to be / stay</span></span><span class="target">Exact</span></button>
                 <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-studiare' })"><span><span class="word">studiando</span><span class="meaning">studiare: to study</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-volere' })"><span><span class="word">voglio</span><span class="meaning">volere: to want</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-prendere' })"><span><span class="word">prendere</span><span class="meaning">to get / take</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-credere' })"><span><span class="word">credo</span><span class="meaning">credere: to believe / think</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-cominciare' })"><span><span class="word">hai cominciato</span><span class="meaning">cominciare: to begin</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-giocare' })"><span><span class="word">giocando</span><span class="meaning">giocare: to play</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-specchiarsi' })"><span><span class="word">specchiarsi</span><span class="meaning">to look at oneself in the mirror</span></span><span class="target">Exact</span></button>
               </div>
             </div>
           </aside>
@@ -1512,7 +1607,44 @@
           <div class="warning"><strong>Le prime cinque frasi da imparare:</strong> <em>E tu?</em> | <em>Ah s&igrave;? E com'&egrave;?</em> | <em>Da quanto tempo?</em> | <em>Mi piace molto ___.</em> | <em>Scusa, puoi ripetere pi&ugrave; lentamente?</em></div>
         </div>
         <div class="card">
-          <h3>Vocabulary</h3>
+          <h3>13. Lezione con Stefano</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Come ti chiami?</span><span class="label">EN</span><span class="en-text">What is your name?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Mi chiamo ___.</span><span class="label">EN</span><span class="en-text">My name is ___.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Da dove vieni?</span><span class="label">EN</span><span class="en-text">Where do you come from?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Io vengo dal Brasile.</span><span class="label">EN</span><span class="en-text">I come from Brazil.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Dove vivi adesso?</span><span class="label">EN</span><span class="en-text">Where do you live now?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Vivo in Germania, a Berlino.</span><span class="label">EN</span><span class="en-text">I live in Germany, in Berlin.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Quanti anni hai?</span><span class="label">EN</span><span class="en-text">How old are you?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ho trentotto anni.</span><span class="label">EN</span><span class="en-text">I am thirty-eight years old.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Che lavoro fai?</span><span class="label">EN</span><span class="en-text">What do you do for work?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Sono programmatore.</span><span class="label">EN</span><span class="en-text">I am a programmer.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Qual &egrave; il tuo cibo preferito?</span><span class="label">EN</span><span class="en-text">What is your favorite food?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Da dove viene tua moglie?</span><span class="label">EN</span><span class="en-text">Where does your wife come from?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Lei viene dalla Germania.</span><span class="label">EN</span><span class="en-text">She comes from Germany.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Mia moglie si chiama Antonia, &egrave; tedesca ma ha un nome italiano.</span><span class="label">EN</span><span class="en-text">My wife is called Antonia; she is German but has an Italian name.</span></div>
+        </div>
+        <div class="card">
+          <h3>14. Risposte pratiche</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Che cosa stai mangiando?</span><span class="label">EN</span><span class="en-text">What are you eating?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">A che cosa stai giocando adesso?</span><span class="label">EN</span><span class="en-text">What are you playing now?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Che cosa stai giocando in questi giorni?</span><span class="label">EN</span><span class="en-text">What are you playing these days?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ieri ti ho visto al bar. Che cosa stavi bevendo?</span><span class="label">EN</span><span class="en-text">Yesterday I saw you at the bar. What were you drinking?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Che cosa stavi mangiando?</span><span class="label">EN</span><span class="en-text">What were you eating?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ieri, quando stavo al bar, stavo mangiando un elefante di biscotto.</span><span class="label">EN</span><span class="en-text">Yesterday, when I was at the bar, I was eating a cookie elephant.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Che fai dopodomani?</span><span class="label">EN</span><span class="en-text">What are you doing the day after tomorrow?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Dopodomani faccio sei lezioni e poi vado al cinema.</span><span class="label">EN</span><span class="en-text">The day after tomorrow I have six lessons and then I go to the cinema.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Oggi andiamo a mangiare insieme, che cosa vuoi prendere?</span><span class="label">EN</span><span class="en-text">Today we are going to eat together; what do you want to get?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Oggi voglio prendere una pizza, e tu?</span><span class="label">EN</span><span class="en-text">Today I want to get a pizza, and you?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Credo che prender&ograve; una pizza anche io.</span><span class="label">EN</span><span class="en-text">I think I will get a pizza too.</span></div>
+        </div>
+        <div class="card">
+          <h3>15. Imperfetto vs passato prossimo</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Quando ero un bambino, mangiavo la pizza tutti i giorni.</span><span class="label">EN</span><span class="en-text">When I was a child, I used to eat pizza every day.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ieri ho mangiato la pizza.</span><span class="label">EN</span><span class="en-text">Yesterday I ate pizza.</span></div>
+          <div class="tip"><strong>Use the contrast:</strong> <em>mangiavo</em> for repeated background habit, <em>ho mangiato</em> for one completed event.</div>
+        </div>
+        <div class="card">
+          <h3>Known Dictionary</h3>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Italiano</th><th>English</th></tr></thead>
@@ -1540,6 +1672,46 @@
                 <tr><td>stare</td><td>to stay / to be (state)</td></tr>
                 <tr><td>bene</td><td>well (adverb &mdash; invariable)</td></tr>
                 <tr><td>ieri</td><td>yesterday</td></tr>
+                <tr><td>mio / mia / miei / mie</td><td>my</td></tr>
+                <tr><td>tuo / tua / tuoi / tue</td><td>your</td></tr>
+                <tr><td>suo / sua / suoi / sue</td><td>his / her</td></tr>
+                <tr><td>nostro / nostra / nostri / nostre</td><td>our</td></tr>
+                <tr><td>vostro / vostra / vostri / vostre</td><td>your plural</td></tr>
+                <tr><td>loro</td><td>their / they</td></tr>
+                <tr><td>di</td><td>of</td></tr>
+                <tr><td>a</td><td>at / to</td></tr>
+                <tr><td>da</td><td>from / to</td></tr>
+                <tr><td>in</td><td>in</td></tr>
+                <tr><td>con</td><td>with</td></tr>
+                <tr><td>su</td><td>on / about</td></tr>
+                <tr><td>per</td><td>for / through</td></tr>
+                <tr><td>tra / fra</td><td>between / among</td></tr>
+                <tr><td>del / dello / della / dell'</td><td>of the (singular)</td></tr>
+                <tr><td>dei / degli / delle</td><td>of the (plural)</td></tr>
+                <tr><td>dado</td><td>die / cube</td></tr>
+                <tr><td>telefono</td><td>phone</td></tr>
+                <tr><td>drago</td><td>dragon</td></tr>
+                <tr><td>draghi</td><td>dragons</td></tr>
+                <tr><td>abbastanza</td><td>enough / quite</td></tr>
+                <tr><td>stamattina</td><td>this morning</td></tr>
+                <tr><td>specchiarsi</td><td>to look at oneself in the mirror</td></tr>
+                <tr><td>bellissimo</td><td>beautiful / very handsome</td></tr>
+                <tr><td>adesso / ora</td><td>now</td></tr>
+                <tr><td>dove</td><td>where</td></tr>
+                <tr><td>quando</td><td>when</td></tr>
+                <tr><td>moglie</td><td>wife</td></tr>
+                <tr><td>tedesco / tedesca</td><td>German</td></tr>
+                <tr><td>cibo preferito</td><td>favorite food</td></tr>
+                <tr><td>bar</td><td>bar / cafe</td></tr>
+                <tr><td>biscotto</td><td>cookie / biscuit</td></tr>
+                <tr><td>dopodomani</td><td>the day after tomorrow</td></tr>
+                <tr><td>cinema</td><td>cinema / movie theater</td></tr>
+                <tr><td>prendere</td><td>to get / take</td></tr>
+                <tr><td>credere</td><td>to believe / think</td></tr>
+                <tr><td>cominciare</td><td>to begin</td></tr>
+                <tr><td>giocare</td><td>to play</td></tr>
+                <tr><td>volere</td><td>to want</td></tr>
+                <tr><td>stella alpina</td><td>edelweiss</td></tr>
               </tbody>
             </table>
           </div>
@@ -1599,6 +1771,7 @@
             <tr><td>Futuro anteriore</td><td>sar&ograve; andato/a</td></tr>
             <tr><td>Condizionale passato</td><td>sarei andato/a</td></tr>
             <tr><td>Congiuntivo passato</td><td>sia andato/a</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>fossi andato/a</td></tr>
             <tr><td>Modi indefiniti</td><td>andare | andato | andando | essendo andato</td></tr>
           </tbody></table></div>
           <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">Vado a casa.</span><span class="label">EN</span><span class="en-text">I am going home.</span></div>
@@ -1622,6 +1795,7 @@
             <tr><td>Futuro anteriore</td><td>avr&ograve; vissuto</td></tr>
             <tr><td>Condizionale passato</td><td>avrei vissuto</td></tr>
             <tr><td>Congiuntivo passato</td><td>abbia vissuto</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>avessi vissuto</td></tr>
             <tr><td>Modi indefiniti</td><td>vivere | vissuto | vivendo | avendo vissuto</td></tr>
           </tbody></table></div>
           <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">Vivo a ___.</span><span class="label">EN</span><span class="en-text">I live in ___.</span></div>
@@ -1645,6 +1819,7 @@
             <tr><td>Futuro anteriore</td><td>mi sar&ograve; occupato/a</td></tr>
             <tr><td>Condizionale passato</td><td>mi sarei occupato/a</td></tr>
             <tr><td>Congiuntivo passato</td><td>mi sia occupato/a</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>mi fossi occupato/a</td></tr>
             <tr><td>Modi indefiniti</td><td>occuparsi | occupato | occupandosi | essendosi occupato</td></tr>
           </tbody></table></div>
           <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">Mi occupo di app Android.</span><span class="label">EN</span><span class="en-text">I work on Android apps.</span></div>
@@ -1668,6 +1843,7 @@
             <tr><td>Futuro anteriore</td><td>avr&ograve; fatto</td></tr>
             <tr><td>Condizionale passato</td><td>avrei fatto</td></tr>
             <tr><td>Congiuntivo passato</td><td>abbia fatto</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>avessi fatto</td></tr>
             <tr><td>Modi indefiniti</td><td>fare | fatto | facendo | avendo fatto</td></tr>
           </tbody></table></div>
           <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">Che lavoro fai?</span><span class="label">EN</span><span class="en-text">What do you do for work?</span></div>
@@ -1699,6 +1875,7 @@
             <tr><td>Futuro anteriore</td><td>sar&ograve; piaciuto/a | mi sar&agrave; piaciuto</td></tr>
             <tr><td>Condizionale passato</td><td>sarei piaciuto/a | mi sarebbe piaciuto</td></tr>
             <tr><td>Congiuntivo passato</td><td>sia piaciuto/a | mi sia piaciuto</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>fossi piaciuto/a | mi fosse piaciuto</td></tr>
             <tr><td>Modi indefiniti</td><td>piacere | piaciuto | piacendo | essendo piaciuto</td></tr>
           </tbody></table></div>
           <div class="tip"><strong>Pattern:</strong> Italian says something like "drawing is pleasing to me": <em>mi piace disegnare</em>.</div>
@@ -1722,6 +1899,7 @@
             <tr><td>Futuro anteriore</td><td>avr&ograve; disegnato</td></tr>
             <tr><td>Condizionale passato</td><td>avrei disegnato</td></tr>
             <tr><td>Congiuntivo passato</td><td>abbia disegnato</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>avessi disegnato</td></tr>
             <tr><td>Modi indefiniti</td><td>disegnare | disegnato | disegnando | avendo disegnato</td></tr>
           </tbody></table></div>
         </div>
@@ -1744,6 +1922,7 @@
             <tr><td>Futuro anteriore</td><td>avr&ograve; creato</td></tr>
             <tr><td>Condizionale passato</td><td>avrei creato</td></tr>
             <tr><td>Congiuntivo passato</td><td>abbia creato</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>avessi creato</td></tr>
             <tr><td>Modi indefiniti</td><td>creare | creato | creando | avendo creato</td></tr>
           </tbody></table></div>
         </div>
@@ -1766,6 +1945,7 @@
             <tr><td>Futuro anteriore</td><td>sar&ograve; stato/a</td></tr>
             <tr><td>Condizionale passato</td><td>sarei stato/a</td></tr>
             <tr><td>Congiuntivo passato</td><td>sia stato/a</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>fossi stato/a</td></tr>
             <tr><td>Modi indefiniti</td><td>stare | stato | stando | essendo stato</td></tr>
           </tbody></table></div>
           <div class="tip"><strong>For progressive actions:</strong> use <em>stare + gerundio</em>, as in <em>sto studiando</em>.</div>
@@ -1789,9 +1969,154 @@
             <tr><td>Futuro anteriore</td><td>avr&ograve; studiato</td></tr>
             <tr><td>Condizionale passato</td><td>avrei studiato</td></tr>
             <tr><td>Congiuntivo passato</td><td>abbia studiato</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>avessi studiato</td></tr>
             <tr><td>Modi indefiniti</td><td>studiare | studiato | studiando | avendo studiato</td></tr>
             <tr><td>Progressivo</td><td>sto studiando</td></tr>
           </tbody></table></div>
+        </div>
+        <div class="card" id="verb-volere">
+          <h3>Volere &mdash; to want</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>voglio</td><td>vuoi</td><td>vuole</td><td>vogliamo</td><td>volete</td><td>vogliono</td></tr>
+            <tr><td>Imperfetto</td><td>volevo</td><td>volevi</td><td>voleva</td><td>volevamo</td><td>volevate</td><td>volevano</td></tr>
+            <tr><td>Pass. remoto</td><td>volli</td><td>volesti</td><td>volle</td><td>volemmo</td><td>voleste</td><td>vollero</td></tr>
+            <tr><td>Futuro</td><td>vorr&ograve;</td><td>vorrai</td><td>vorr&agrave;</td><td>vorremo</td><td>vorrete</td><td>vorranno</td></tr>
+            <tr><td>Condizionale</td><td>vorrei</td><td>vorresti</td><td>vorrebbe</td><td>vorremmo</td><td>vorreste</td><td>vorrebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>voglia</td><td>voglia</td><td>voglia</td><td>vogliamo</td><td>vogliate</td><td>vogliano</td></tr>
+            <tr><td>Cong. imperf.</td><td>volessi</td><td>volessi</td><td>volesse</td><td>volessimo</td><td>voleste</td><td>volessero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>vuoi / vogli!</td><td>voglia!</td><td>vogliamo!</td><td>vogliate!</td><td>vogliano!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>avere + voluto</td></tr>
+            <tr><td>Passato prossimo</td><td>ho voluto</td></tr>
+            <tr><td>Trapassato prossimo</td><td>avevo voluto</td></tr>
+            <tr><td>Futuro anteriore</td><td>avr&ograve; voluto</td></tr>
+            <tr><td>Condizionale passato</td><td>avrei voluto</td></tr>
+            <tr><td>Congiuntivo passato</td><td>abbia voluto</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>avessi voluto</td></tr>
+            <tr><td>Modi indefiniti</td><td>volere | voluto | volendo | avendo voluto</td></tr>
+          </tbody></table></div>
+          <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">Io voglio prendere una pizza.</span><span class="label">EN</span><span class="en-text">I want to get a pizza.</span></div>
+        </div>
+        <div class="card" id="verb-prendere">
+          <h3>Prendere &mdash; to get / take</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>prendo</td><td>prendi</td><td>prende</td><td>prendiamo</td><td>prendete</td><td>prendono</td></tr>
+            <tr><td>Imperfetto</td><td>prendevo</td><td>prendevi</td><td>prendeva</td><td>prendevamo</td><td>prendevate</td><td>prendevano</td></tr>
+            <tr><td>Pass. remoto</td><td>presi</td><td>prendesti</td><td>prese</td><td>prendemmo</td><td>prendeste</td><td>presero</td></tr>
+            <tr><td>Futuro</td><td>prender&ograve;</td><td>prenderai</td><td>prender&agrave;</td><td>prenderemo</td><td>prenderete</td><td>prenderanno</td></tr>
+            <tr><td>Condizionale</td><td>prenderei</td><td>prenderesti</td><td>prenderebbe</td><td>prenderemmo</td><td>prendereste</td><td>prenderebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>prenda</td><td>prenda</td><td>prenda</td><td>prendiamo</td><td>prendiate</td><td>prendano</td></tr>
+            <tr><td>Cong. imperf.</td><td>prendessi</td><td>prendessi</td><td>prendesse</td><td>prendessimo</td><td>prendeste</td><td>prendessero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>prendi!</td><td>prenda!</td><td>prendiamo!</td><td>prendete!</td><td>prendano!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>avere + preso</td></tr>
+            <tr><td>Passato prossimo</td><td>ho preso</td></tr>
+            <tr><td>Trapassato prossimo</td><td>avevo preso</td></tr>
+            <tr><td>Futuro anteriore</td><td>avr&ograve; preso</td></tr>
+            <tr><td>Condizionale passato</td><td>avrei preso</td></tr>
+            <tr><td>Congiuntivo passato</td><td>abbia preso</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>avessi preso</td></tr>
+            <tr><td>Modi indefiniti</td><td>prendere | preso | prendendo | avendo preso</td></tr>
+          </tbody></table></div>
+          <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">Credo che prender&ograve; una pizza anche io.</span><span class="label">EN</span><span class="en-text">I think I will get a pizza too.</span></div>
+        </div>
+        <div class="card" id="verb-credere">
+          <h3>Credere &mdash; to believe / think</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>credo</td><td>credi</td><td>crede</td><td>crediamo</td><td>credete</td><td>credono</td></tr>
+            <tr><td>Imperfetto</td><td>credevo</td><td>credevi</td><td>credeva</td><td>credevamo</td><td>credevate</td><td>credevano</td></tr>
+            <tr><td>Pass. remoto</td><td>credetti</td><td>credesti</td><td>credette</td><td>credemmo</td><td>credeste</td><td>credettero</td></tr>
+            <tr><td>Futuro</td><td>creder&ograve;</td><td>crederai</td><td>creder&agrave;</td><td>crederemo</td><td>crederete</td><td>crederanno</td></tr>
+            <tr><td>Condizionale</td><td>crederei</td><td>crederesti</td><td>crederebbe</td><td>crederemmo</td><td>credereste</td><td>crederebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>creda</td><td>creda</td><td>creda</td><td>crediamo</td><td>crediate</td><td>credano</td></tr>
+            <tr><td>Cong. imperf.</td><td>credessi</td><td>credessi</td><td>credesse</td><td>credessimo</td><td>credeste</td><td>credessero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>credi!</td><td>creda!</td><td>crediamo!</td><td>credete!</td><td>credano!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>avere + creduto</td></tr>
+            <tr><td>Passato prossimo</td><td>ho creduto</td></tr>
+            <tr><td>Trapassato prossimo</td><td>avevo creduto</td></tr>
+            <tr><td>Futuro anteriore</td><td>avr&ograve; creduto</td></tr>
+            <tr><td>Condizionale passato</td><td>avrei creduto</td></tr>
+            <tr><td>Congiuntivo passato</td><td>abbia creduto</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>avessi creduto</td></tr>
+            <tr><td>Modi indefiniti</td><td>credere | creduto | credendo | avendo creduto</td></tr>
+          </tbody></table></div>
+          <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">Credo che sia una buona idea.</span><span class="label">EN</span><span class="en-text">I think it is a good idea.</span></div>
+        </div>
+        <div class="card" id="verb-cominciare">
+          <h3>Cominciare &mdash; to begin</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>comincio</td><td>cominci</td><td>comincia</td><td>cominciamo</td><td>cominciate</td><td>cominciano</td></tr>
+            <tr><td>Imperfetto</td><td>cominciavo</td><td>cominciavi</td><td>cominciava</td><td>cominciavamo</td><td>cominciavate</td><td>cominciavano</td></tr>
+            <tr><td>Pass. remoto</td><td>cominciai</td><td>cominciasti</td><td>cominci&ograve;</td><td>cominciammo</td><td>cominciaste</td><td>cominciarono</td></tr>
+            <tr><td>Futuro</td><td>comincer&ograve;</td><td>comincerai</td><td>comincer&agrave;</td><td>cominceremo</td><td>comincerete</td><td>cominceranno</td></tr>
+            <tr><td>Condizionale</td><td>comincerei</td><td>cominceresti</td><td>comincerebbe</td><td>cominceremmo</td><td>comincereste</td><td>comincerebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>cominci</td><td>cominci</td><td>cominci</td><td>cominciamo</td><td>cominciate</td><td>comincino</td></tr>
+            <tr><td>Cong. imperf.</td><td>cominciassi</td><td>cominciassi</td><td>cominciasse</td><td>cominciassimo</td><td>cominciaste</td><td>cominciassero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>comincia!</td><td>cominci!</td><td>cominciamo!</td><td>cominciate!</td><td>comincino!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>avere + cominciato</td></tr>
+            <tr><td>Passato prossimo</td><td>ho cominciato</td></tr>
+            <tr><td>Trapassato prossimo</td><td>avevo cominciato</td></tr>
+            <tr><td>Futuro anteriore</td><td>avr&ograve; cominciato</td></tr>
+            <tr><td>Condizionale passato</td><td>avrei cominciato</td></tr>
+            <tr><td>Congiuntivo passato</td><td>abbia cominciato</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>avessi cominciato</td></tr>
+            <tr><td>Modi indefiniti</td><td>cominciare | cominciato | cominciando | avendo cominciato</td></tr>
+          </tbody></table></div>
+          <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">Hai cominciato?</span><span class="label">EN</span><span class="en-text">Did you begin?</span></div>
+        </div>
+        <div class="card" id="verb-giocare">
+          <h3>Giocare &mdash; to play</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>gioco</td><td>giochi</td><td>gioca</td><td>giochiamo</td><td>giocate</td><td>giocano</td></tr>
+            <tr><td>Imperfetto</td><td>giocavo</td><td>giocavi</td><td>giocava</td><td>giocavamo</td><td>giocavate</td><td>giocavano</td></tr>
+            <tr><td>Pass. remoto</td><td>giocai</td><td>giocasti</td><td>gioc&ograve;</td><td>giocammo</td><td>giocaste</td><td>giocarono</td></tr>
+            <tr><td>Futuro</td><td>giocher&ograve;</td><td>giocherai</td><td>giocher&agrave;</td><td>giocheremo</td><td>giocherete</td><td>giocheranno</td></tr>
+            <tr><td>Condizionale</td><td>giocherei</td><td>giocheresti</td><td>giocherebbe</td><td>giocheremmo</td><td>giochereste</td><td>giocherebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>giochi</td><td>giochi</td><td>giochi</td><td>giochiamo</td><td>giochiate</td><td>giochino</td></tr>
+            <tr><td>Cong. imperf.</td><td>giocassi</td><td>giocassi</td><td>giocasse</td><td>giocassimo</td><td>giocaste</td><td>giocassero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>gioca!</td><td>giochi!</td><td>giochiamo!</td><td>giocate!</td><td>giochino!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>avere + giocato</td></tr>
+            <tr><td>Passato prossimo</td><td>ho giocato</td></tr>
+            <tr><td>Trapassato prossimo</td><td>avevo giocato</td></tr>
+            <tr><td>Futuro anteriore</td><td>avr&ograve; giocato</td></tr>
+            <tr><td>Condizionale passato</td><td>avrei giocato</td></tr>
+            <tr><td>Congiuntivo passato</td><td>abbia giocato</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>avessi giocato</td></tr>
+            <tr><td>Modi indefiniti</td><td>giocare | giocato | giocando | avendo giocato</td></tr>
+          </tbody></table></div>
+          <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">A che cosa stai giocando adesso?</span><span class="label">EN</span><span class="en-text">What are you playing now?</span></div>
+        </div>
+        <div class="card" id="verb-specchiarsi">
+          <h3>Specchiarsi &mdash; to look at oneself in the mirror</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>mi specchio</td><td>ti specchi</td><td>si specchia</td><td>ci specchiamo</td><td>vi specchiate</td><td>si specchiano</td></tr>
+            <tr><td>Imperfetto</td><td>mi specchiavo</td><td>ti specchiavi</td><td>si specchiava</td><td>ci specchiavamo</td><td>vi specchiavate</td><td>si specchiavano</td></tr>
+            <tr><td>Pass. remoto</td><td>mi specchiai</td><td>ti specchiasti</td><td>si specchi&ograve;</td><td>ci specchiammo</td><td>vi specchiaste</td><td>si specchiarono</td></tr>
+            <tr><td>Futuro</td><td>mi specchier&ograve;</td><td>ti specchierai</td><td>si specchier&agrave;</td><td>ci specchieremo</td><td>vi specchierete</td><td>si specchieranno</td></tr>
+            <tr><td>Condizionale</td><td>mi specchierei</td><td>ti specchieresti</td><td>si specchierebbe</td><td>ci specchieremmo</td><td>vi specchiereste</td><td>si specchierebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>mi specchi</td><td>ti specchi</td><td>si specchi</td><td>ci specchiamo</td><td>vi specchiate</td><td>si specchino</td></tr>
+            <tr><td>Cong. imperf.</td><td>mi specchiassi</td><td>ti specchiassi</td><td>si specchiasse</td><td>ci specchiassimo</td><td>vi specchiaste</td><td>si specchiassero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>specchiati!</td><td>si specchi!</td><td>specchiamoci!</td><td>specchiatevi!</td><td>si specchino!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>essere + specchiato/a/i/e</td></tr>
+            <tr><td>Passato prossimo</td><td>mi sono specchiato/a</td></tr>
+            <tr><td>Trapassato prossimo</td><td>mi ero specchiato/a</td></tr>
+            <tr><td>Futuro anteriore</td><td>mi sar&ograve; specchiato/a</td></tr>
+            <tr><td>Condizionale passato</td><td>mi sarei specchiato/a</td></tr>
+            <tr><td>Congiuntivo passato</td><td>mi sia specchiato/a</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>mi fossi specchiato/a</td></tr>
+            <tr><td>Modi indefiniti</td><td>specchiarsi | specchiato | specchiandosi | essendosi specchiato</td></tr>
+          </tbody></table></div>
+          <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">Stamattina mi sono specchiato ed ero bellissimo.</span><span class="label">EN</span><span class="en-text">This morning I looked at myself in the mirror and I was very handsome.</span></div>
         </div>
       </div>
 
@@ -2245,6 +2570,16 @@ const QUIZ = {
       ['gelato','\ud83c\udf66','ice cream'],['formaggio','\ud83e\uddc0','cheese'],['bambino','\ud83d\udc76','baby'],
       ['re','\ud83d\udc51','king'],['luna','\ud83c\udf15','moon'],['tempo','\u23f0','time'],
       ['porta','\ud83d\udeaa','door'],['finestra','\ud83e\ude9f','window'],
+      ['dado','\ud83c\udfb2','die / cube'],['telefono','\ud83d\udcde','phone'],['drago','\ud83d\udc09','dragon'],
+      ['draghi','\ud83d\udc09','dragons'],['moglie','\ud83d\udc8d','wife'],['bar','\ud83c\udf7a','bar / cafe'],
+      ['biscotto','\ud83c\udf6a','cookie / biscuit'],['cinema','\ud83c\udfac','cinema'],
+      ['dopodomani','\ud83d\udcc5','the day after tomorrow'],['stamattina','\ud83c\udf05','this morning'],
+      ['abbastanza','\ud83d\udc4c','enough / quite'],['bellissimo','\u2728','beautiful / very handsome'],
+      ['tedesca','\ud83c\udde9\ud83c\uddea','German'],['adesso','\u23f1\ufe0f','now'],['ora','\u23f0','now'],
+      ['dove','\ud83d\udccd','where'],['quando','\ud83d\udcc6','when'],['stella alpina','\ud83c\udf3c','edelweiss'],
+      ['volere','\ud83d\ude4b','to want'],['prendere','\ud83e\udd32','to get / take'],
+      ['credere','\ud83e\udd14','to believe / think'],['cominciare','\ud83c\udfc1','to begin'],
+      ['giocare','\ud83c\udfae','to play'],['specchiarsi','\ud83e\ude9e','to look at oneself in the mirror'],
     ],
     conjugation: [
       {verb:'essere',tense:'Presente',forms:{io:'sono',tu:'sei','lui/lei':'\u00e8',noi:'siamo',voi:'siete',loro:'sono'}},
@@ -2262,12 +2597,22 @@ const QUIZ = {
       {verb:'avere',tense:'Imperfetto',forms:{io:'avevo',tu:'avevi','lui/lei':'aveva',noi:'avevamo',voi:'avevate',loro:'avevano'}},
       {verb:'essere',tense:'Futuro',forms:{io:'sar\u00f2',tu:'sarai','lui/lei':'sar\u00e0',noi:'saremo',voi:'sarete',loro:'saranno'}},
       {verb:'avere',tense:'Futuro',forms:{io:'avr\u00f2',tu:'avrai','lui/lei':'avr\u00e0',noi:'avremo',voi:'avrete',loro:'avranno'}},
+      {verb:'volere',tense:'Presente',forms:{io:'voglio',tu:'vuoi','lui/lei':'vuole',noi:'vogliamo',voi:'volete',loro:'vogliono'}},
+      {verb:'volere',tense:'Futuro',forms:{io:'vorr\u00f2',tu:'vorrai','lui/lei':'vorr\u00e0',noi:'vorremo',voi:'vorrete',loro:'vorranno'}},
+      {verb:'prendere',tense:'Presente',forms:{io:'prendo',tu:'prendi','lui/lei':'prende',noi:'prendiamo',voi:'prendete',loro:'prendono'}},
+      {verb:'prendere',tense:'Futuro',forms:{io:'prender\u00f2',tu:'prenderai','lui/lei':'prender\u00e0',noi:'prenderemo',voi:'prenderete',loro:'prenderanno'}},
+      {verb:'credere',tense:'Presente',forms:{io:'credo',tu:'credi','lui/lei':'crede',noi:'crediamo',voi:'credete',loro:'credono'}},
+      {verb:'cominciare',tense:'Presente',forms:{io:'comincio',tu:'cominci','lui/lei':'comincia',noi:'cominciamo',voi:'cominciate',loro:'cominciano'}},
+      {verb:'giocare',tense:'Presente',forms:{io:'gioco',tu:'giochi','lui/lei':'gioca',noi:'giochiamo',voi:'giocate',loro:'giocano'}},
+      {verb:'specchiarsi',tense:'Presente',forms:{io:'mi specchio',tu:'ti specchi','lui/lei':'si specchia',noi:'ci specchiamo',voi:'vi specchiate',loro:'si specchiano'}},
     ],
     articles: [
       ['gatto','il'],['gatta','la'],['studente','lo'],['amica','l\''],['amico','l\''],
       ['zaino','lo'],['psicologo','lo'],['libro','il'],['donna','la'],['uomo','l\''],
       ['scuola','la'],['gnomo','lo'],['casa','la'],['treno','il'],['drago','il'],
       ['ragazzo','il'],['ragazza','la'],['acqua','l\''],['stella','la'],['notte','la'],
+      ['dado','il'],['telefono','il'],['draghi','i'],['moglie','la'],['bar','il'],
+      ['biscotto','il'],['cinema','il'],['stella alpina','la'],
     ],
     numbers: [
       [0,'zero'],[1,'uno'],[2,'due'],[3,'tre'],[4,'quattro'],[5,'cinque'],
@@ -2436,7 +2781,7 @@ const QUIZ = {
     const pair = this.pick(this.data.articles);
     const noun = pair[0];
     const answer = pair[1];
-    const allArticles = ['il','lo','la','l\'','un','uno','una','un\''];
+    const allArticles = ['il','lo','la','l\'','i','gli','le','un','uno','una','un\''];
     let options = [answer];
     while (options.length < 4) {
       const r = this.pick(allArticles);
