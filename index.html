@@ -304,6 +304,151 @@
     margin-bottom: 12px;
     color: var(--terracotta-bright);
   }
+  #panel-phrases {
+    max-width: min(1180px, 100%);
+  }
+  #panel-phrases > .card {
+    max-width: 900px;
+  }
+  #panel-phrases > .study-row {
+    max-width: 1180px;
+  }
+  .study-row {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+    gap: 22px;
+    align-items: start;
+  }
+  .study-row:not(.vocab-open) {
+    grid-template-columns: minmax(0, 900px);
+  }
+  .study-row:not(.vocab-open) .study-side {
+    display: none;
+  }
+  .method-card {
+    position: relative;
+  }
+  .method-card-head {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  .method-card-head h3 {
+    margin-bottom: 0;
+  }
+  .vocab-toggle {
+    flex-shrink: 0;
+    border: 1px solid rgba(200, 97, 74, 0.14);
+    background: var(--terracotta-glow);
+    color: var(--terracotta-bright);
+    border-radius: 6px;
+    padding: 7px 10px;
+    font: 600 0.66rem 'IBM Plex Mono', monospace;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .vocab-toggle:hover,
+  .vocab-toggle[aria-expanded="true"] {
+    background: var(--terracotta-glow-strong);
+    border-color: rgba(200, 97, 74, 0.24);
+    color: var(--text-bright);
+  }
+  .study-main { min-width: 0; }
+  .study-side {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    position: sticky;
+    top: 20px;
+    margin-bottom: 14px;
+  }
+  .study-side-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-faint);
+    margin-bottom: 10px;
+  }
+  .study-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .study-tab {
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-dim);
+    border-radius: 6px;
+    padding: 7px 8px;
+    font: 600 0.7rem 'IBM Plex Mono', monospace;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .study-tab:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+  .study-tab.active {
+    background: var(--terracotta-glow-strong);
+    border-color: rgba(200, 97, 74, 0.16);
+    color: var(--terracotta-bright);
+  }
+  .study-tab-panel { display: none; }
+  .study-tab-panel.active { display: block; }
+  .word-list {
+    display: grid;
+    gap: 6px;
+  }
+  .word-chip {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+    align-items: center;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-card);
+    color: var(--text);
+    padding: 8px 10px;
+    text-align: left;
+    font: inherit;
+    cursor: default;
+  }
+  button.word-chip { cursor: pointer; }
+  button.word-chip:hover {
+    background: var(--terracotta-glow);
+    border-color: rgba(200, 97, 74, 0.18);
+  }
+  .word-chip .word {
+    display: block;
+    color: var(--text-bright);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    overflow-wrap: anywhere;
+  }
+  .word-chip .meaning {
+    display: block;
+    color: var(--text-dim);
+    font-size: 0.72rem;
+    overflow-wrap: anywhere;
+  }
+  .word-chip .target {
+    color: var(--terracotta-bright);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
 
   /* ══ Collapsible sections within cards ══ */
   .collapse-trigger {
@@ -774,6 +919,11 @@
     }
     .mobile-overlay.open { display: block; }
     .content { padding: 20px 16px 80px; }
+    .study-row,
+    .study-row:not(.vocab-open) { grid-template-columns: 1fr; }
+    .study-side { position: static; }
+    .method-card-head { flex-direction: column; }
+    .vocab-toggle { width: 100%; }
   }
   @media (min-width: 769px) {
     .mobile-bar, .mobile-overlay { display: none !important; }
@@ -800,7 +950,7 @@
   <!-- ══ Sidebar ══ -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-      <h1>Impara l'<span>Italiano</span></h1>
+      <h1>Impara l'<span>italiano</span></h1>
       <div class="flag-bar"><div class="g"></div><div class="w"></div><div class="r"></div></div>
     </div>
     <nav class="sidebar-nav">
@@ -815,24 +965,24 @@
         <a class="nav-item" data-panel="articles">Articoli</a>
         <a class="nav-item" data-panel="colors">Colori</a>
         <a class="nav-item" data-panel="numbers">Numeri</a>
-        <a class="nav-item" data-panel="phrases">Frasi Utili</a>
+        <a class="nav-item" data-panel="phrases">Frasi utili</a>
       </div>
       <div class="nav-group">
         <div class="nav-group-label"><span class="dot dot-steel"></span>Livello 2 &mdash; Fondamenti</div>
-        <a class="nav-item" data-panel="present-prog">Presente Progressivo</a>
+        <a class="nav-item" data-panel="present-prog">Progressivo: stare + gerundio</a>
         <a class="nav-item" data-panel="essere">Essere</a>
         <a class="nav-item" data-panel="avere">Avere</a>
       </div>
       <div class="nav-group">
         <div class="nav-group-label"><span class="dot dot-amber"></span>Livello 3 &mdash; Coniugazioni</div>
-        <a class="nav-item" data-panel="amare">1&ordf; &mdash; ARE (Amare)</a>
-        <a class="nav-item" data-panel="temere">2&ordf; &mdash; ERE (Temere)</a>
-        <a class="nav-item" data-panel="sentire">3&ordf; &mdash; IRE (Sentire)</a>
+        <a class="nav-item" data-panel="amare">1&ordf; coniugazione &mdash; ARE (amare)</a>
+        <a class="nav-item" data-panel="temere">2&ordf; coniugazione &mdash; ERE (temere)</a>
+        <a class="nav-item" data-panel="sentire">3&ordf; coniugazione &mdash; IRE (sentire)</a>
       </div>
       <div class="nav-group">
         <div class="nav-group-label"><span class="dot dot-lavender"></span>Livello 4 &mdash; Avanzato</div>
-        <a class="nav-item" data-panel="irregular">Verbi Irregolari</a>
-        <a class="nav-item" data-panel="reflexive">Verbi Riflessivi</a>
+        <a class="nav-item" data-panel="irregular">Verbi irregolari</a>
+        <a class="nav-item" data-panel="reflexive">Verbi riflessivi</a>
       </div>
     </nav>
   </aside>
@@ -849,7 +999,7 @@
 
       <!-- ══ LANDING ══ -->
       <div class="panel landing active" id="panel-home">
-        <h2 class="landing-title">Impara l'<span>Italiano</span></h2>
+        <h2 class="landing-title">Impara l'<span>italiano</span></h2>
         <p class="landing-sub">Dalle basi alla padronanza &mdash; scegli un argomento</p>
 
         <div class="topic-grid">
@@ -876,7 +1026,7 @@
           <a class="topic-card" data-panel="colors">
             <div class="tc-level tc-sage"><span class="dot dot-sage"></span>Livello 1</div>
             <div class="tc-name">Colori</div>
-            <div class="tc-desc">12 colors with declension table</div>
+            <div class="tc-desc">28 colors with declension table</div>
           </a>
           <a class="topic-card" data-panel="numbers">
             <div class="tc-level tc-sage"><span class="dot dot-sage"></span>Livello 1</div>
@@ -885,7 +1035,7 @@
           </a>
           <a class="topic-card" data-panel="phrases">
             <div class="tc-level tc-sage"><span class="dot dot-sage"></span>Livello 1</div>
-            <div class="tc-name">Frasi Utili</div>
+            <div class="tc-name">Frasi utili</div>
             <div class="tc-desc">Conversations, vocab, greetings</div>
           </a>
           <a class="topic-card" data-panel="present-prog">
@@ -1066,6 +1216,22 @@
             <div class="color-card"><div class="color-swatch" style="background:#1a3c7a"></div><div class="color-label"><span class="it">blu</span><span class="en">blue</span></div></div>
             <div class="color-card"><div class="color-swatch" style="background:#e88da8"></div><div class="color-label"><span class="it">rosa</span><span class="en">pink</span></div></div>
             <div class="color-card"><div class="color-swatch" style="background:#8e44ad"></div><div class="color-label"><span class="it">viola</span><span class="en">purple</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#8fd3ff"></div><div class="color-label"><span class="it">celeste</span><span class="en">light blue</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#1abc9c"></div><div class="color-label"><span class="it">turchese</span><span class="en">turquoise</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#008080"></div><div class="color-label"><span class="it">verde acqua</span><span class="en">teal</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#f5f5dc"></div><div class="color-label"><span class="it">beige</span><span class="en">beige</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#fff1cc"></div><div class="color-label"><span class="it">crema</span><span class="en">cream</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#ffd700"></div><div class="color-label"><span class="it">oro</span><span class="en">gold</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#c0c0c0"></div><div class="color-label"><span class="it">argento</span><span class="en">silver</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#ff7f50"></div><div class="color-label"><span class="it">corallo</span><span class="en">coral</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#ff00ff"></div><div class="color-label"><span class="it">magenta</span><span class="en">magenta</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#ff1493"></div><div class="color-label"><span class="it">fucsia</span><span class="en">fuchsia</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#800020"></div><div class="color-label"><span class="it">bordeaux</span><span class="en">burgundy</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#4b0082"></div><div class="color-label"><span class="it">indaco</span><span class="en">indigo</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#c8a2c8"></div><div class="color-label"><span class="it">lilla</span><span class="en">lilac</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#00ffff"></div><div class="color-label"><span class="it">ciano</span><span class="en">cyan</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#808000"></div><div class="color-label"><span class="it">oliva</span><span class="en">olive</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#000080"></div><div class="color-label"><span class="it">blu navy</span><span class="en">navy</span></div></div>
           </div>
         </div>
         <div class="card">
@@ -1081,11 +1247,27 @@
                 <tr><td>azzurro</td><td>azzurro</td><td>azzurra</td><td>azzurri</td><td>azzurre</td></tr>
                 <tr><td>grigio</td><td>grigio</td><td>grigia</td><td>grigi</td><td>grigie</td></tr>
                 <tr><td>verde</td><td>verde</td><td>verde</td><td>verdi</td><td>verdi</td></tr>
+                <tr><td>celeste</td><td>celeste</td><td>celeste</td><td>celesti</td><td>celesti</td></tr>
+                <tr><td>turchese</td><td>turchese</td><td>turchese</td><td>turchesi</td><td>turchesi</td></tr>
                 <tr><td style="color:var(--text-dim)">blu</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
                 <tr><td style="color:var(--text-dim)">rosa</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
                 <tr><td style="color:var(--text-dim)">viola</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
                 <tr><td style="color:var(--text-dim)">marrone</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">usually invariable</td></tr>
                 <tr><td style="color:var(--text-dim)">arancione</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">usually invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">beige</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">crema</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">oro</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">argento</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">verde acqua</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">usually invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">corallo</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">usually invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">magenta</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">fucsia</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">bordeaux</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">indaco</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">usually invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">lilla</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">ciano</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">usually invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">oliva</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">usually invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">blu navy</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
               </tbody>
             </table>
           </div>
@@ -1117,21 +1299,217 @@
       <div class="panel" id="panel-phrases">
         <div class="panel-header">
           <button class="back" onclick="showPanel('home')">&larr;</button>
-          <h2>Frasi Utili</h2>
+          <h2>Frasi utili &mdash; Conversazioni quotidiane</h2>
+        </div>
+        <div class="study-row" id="method-study-row">
+          <div class="card method-card">
+            <div class="method-card-head">
+              <h3>Metodo: rispondi, aggiungi un dettaglio e fai una domanda</h3>
+              <button class="vocab-toggle" type="button" aria-expanded="false" aria-controls="method-study-side" onclick="toggleStudySide(this)">Vocabolario</button>
+            </div>
+            <p>Non memorizzare solo coppie di domande e risposte. Per una conversazione reale, dai una risposta breve, aggiungi un dettaglio e poi fai una domanda all'altra persona.</p>
+            <div class="example"><span class="label">IT</span><span class="it-text">Sono di ___, ma vivo a ___. E tu, di dove sei?</span><span class="label">EN</span><span class="en-text">I am from ___, but I live in ___. And you, where are you from?</span></div>
+            <div class="example"><span class="label">IT</span><span class="it-text">Sono di Roma, ma vivo a Milano.</span><span class="label">EN</span><span class="en-text">I am from Rome, but I live in Milan.</span></div>
+            <div class="example"><span class="label">IT</span><span class="it-text">Sono sviluppatore software. Mi occupo soprattutto di app Android. E tu, che lavoro fai?</span><span class="label">EN</span><span class="en-text">I am a software developer. I mostly work on Android apps. And you, what do you do?</span></div>
+            <div class="example"><span class="label">IT</span><span class="it-text">Lavoro come designer. Mi occupo di prodotti digitali.</span><span class="label">EN</span><span class="en-text">I work as a designer. I work on digital products.</span></div>
+            <div class="example"><span class="label">IT</span><span class="it-text">Mi piace disegnare e creare giochi. Ultimamente sto anche studiando italiano. E tu?</span><span class="label">EN</span><span class="en-text">I like drawing and making games. Recently I am also studying Italian. And you?</span></div>
+            <div class="example"><span class="label">IT</span><span class="it-text">Anch'io sto studiando italiano, ma sono ancora all'inizio.</span><span class="label">EN</span><span class="en-text">I am also studying Italian, but I am still at the beginning.</span></div>
+            <div class="tip"><strong>Formula di conversazione:</strong> risposta + piccolo dettaglio + domanda di ritorno. Cos&igrave; la conversazione continua senza bisogno di molte parole nuove.</div>
+          </div>
+          <aside class="study-side" id="method-study-side" aria-label="Vocabulary and verbs in this block">
+            <div class="study-side-title">In questo blocco</div>
+            <div class="study-tabs" role="tablist" aria-label="Study side tabs">
+              <button class="study-tab active" type="button" role="tab" aria-selected="true" data-study-tab="vocab" onclick="setStudyTab(this)">Vocab</button>
+              <button class="study-tab" type="button" role="tab" aria-selected="false" data-study-tab="verbs" onclick="setStudyTab(this)">Verbi</button>
+            </div>
+            <div class="study-tab-panel active" data-study-panel="vocab" role="tabpanel">
+              <div class="word-list">
+                <div class="word-chip"><span><span class="word">metodo</span><span class="meaning">method</span></span></div>
+                <div class="word-chip"><span><span class="word">risposta</span><span class="meaning">answer</span></span></div>
+                <div class="word-chip"><span><span class="word">dettaglio</span><span class="meaning">detail</span></span></div>
+                <div class="word-chip"><span><span class="word">domanda</span><span class="meaning">question</span></span></div>
+                <div class="word-chip"><span><span class="word">di dove</span><span class="meaning">from where</span></span></div>
+                <div class="word-chip"><span><span class="word">soprattutto</span><span class="meaning">especially / mostly</span></span></div>
+                <div class="word-chip"><span><span class="word">sviluppatore software</span><span class="meaning">software developer</span></span></div>
+                <div class="word-chip"><span><span class="word">app Android</span><span class="meaning">Android apps</span></span></div>
+                <div class="word-chip"><span><span class="word">giochi</span><span class="meaning">games</span></span></div>
+                <div class="word-chip"><span><span class="word">ultimamente</span><span class="meaning">recently</span></span></div>
+              </div>
+            </div>
+            <div class="study-tab-panel" data-study-panel="verbs" role="tabpanel">
+              <div class="word-list">
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-essere' })"><span><span class="word">sono / sei</span><span class="meaning">essere: to be</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-andare' })"><span><span class="word">vado / vai</span><span class="meaning">andare: to go</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-vivere' })"><span><span class="word">vivo</span><span class="meaning">vivere: to live</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-occuparsi' })"><span><span class="word">mi occupo</span><span class="meaning">occuparsi di: to work on</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-fare' })"><span><span class="word">fai</span><span class="meaning">fare: to do / make</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-piacere' })"><span><span class="word">mi piace</span><span class="meaning">piacere: to like</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-disegnare' })"><span><span class="word">disegnare</span><span class="meaning">to draw</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-creare' })"><span><span class="word">creare</span><span class="meaning">to create</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-stare' })"><span><span class="word">sto</span><span class="meaning">stare: to be / stay</span></span><span class="target">Exact</span></button>
+                <button class="word-chip" type="button" onclick="showPanel('conversation-verbs', { focusId: 'verb-studiare' })"><span><span class="word">studiando</span><span class="meaning">studiare: to study</span></span><span class="target">Exact</span></button>
+              </div>
+            </div>
+          </aside>
         </div>
         <div class="card">
-          <h3>Conversazione</h3>
-          <div class="example"><span class="label">IT</span><span class="it-text">Da dove vieni?</span><span class="label">EN</span><span class="en-text">Where are you from?</span></div>
-          <div class="example"><span class="label">IT</span><span class="it-text">Io vengo dal Brasile.</span><span class="label">EN</span><span class="en-text">I come from Brazil.</span></div>
-          <div class="example"><span class="label">IT</span><span class="it-text">Da dove viene tua moglie?</span><span class="label">EN</span><span class="en-text">Where is your wife from?</span></div>
-          <div class="example"><span class="label">IT</span><span class="it-text">Lei viene dalla Germania.</span><span class="label">EN</span><span class="en-text">She comes from Germany.</span></div>
-          <div class="example"><span class="label">IT</span><span class="it-text">Quanti anni hai?</span><span class="label">EN</span><span class="en-text">How old are you?</span></div>
-          <div class="example"><span class="label">IT</span><span class="it-text">Io ho trentotto anni.</span><span class="label">EN</span><span class="en-text">I am 38 years old.</span></div>
-          <div class="example"><span class="label">IT</span><span class="it-text">Dove vivi?</span><span class="label">EN</span><span class="en-text">Where do you live?</span></div>
-          <div class="example"><span class="label">IT</span><span class="it-text">Io vivo in Germania.</span><span class="label">EN</span><span class="en-text">I live in Germany.</span></div>
-          <div class="example"><span class="label">IT</span><span class="it-text">Che cosa stai mangiando?</span><span class="label">EN</span><span class="en-text">What are you eating?</span></div>
-          <div class="example"><span class="label">IT</span><span class="it-text">Ieri al bar stavo bevendo un caff&egrave;.</span><span class="label">EN</span><span class="en-text">Yesterday at the bar I was drinking a coffee.</span></div>
-          <div class="example"><span class="label">IT</span><span class="it-text">Ci vediamo!</span><span class="label">EN</span><span class="en-text">See you!</span></div>
+          <h3>1. Iniziare una conversazione</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ciao, come va?</span><span class="label">EN</span><span class="en-text">Hi, how is it going?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Bene, grazie.</span><span class="label">EN</span><span class="en-text">Good, thanks.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Tutto bene?</span><span class="label">EN</span><span class="en-text">All good?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">S&igrave;, tutto bene, grazie.</span><span class="label">EN</span><span class="en-text">Yes, all good, thanks.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Che fai di bello oggi?</span><span class="label">EN</span><span class="en-text">What are you up to today?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Oggi lavoro un po' e poi mi rilasso.</span><span class="label">EN</span><span class="en-text">Today I am working a bit and then relaxing.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Com'&egrave; andata la giornata?</span><span class="label">EN</span><span class="en-text">How was your day?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">&Egrave; andata bene, ma sono un po' stanco.</span><span class="label">EN</span><span class="en-text">It went well, but I am a bit tired.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Hai programmi per il weekend?</span><span class="label">EN</span><span class="en-text">Do you have plans for the weekend?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Non ancora. Forse faccio una passeggiata.</span><span class="label">EN</span><span class="en-text">Not yet. Maybe I will go for a walk.</span></div>
+        </div>
+        <div class="card">
+          <h3>2. Origine e dove vivi</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Di dove sei?</span><span class="label">EN</span><span class="en-text">Where are you from?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Sono di Berlino.</span><span class="label">EN</span><span class="en-text">I am from Berlin.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Da dove vieni?</span><span class="label">EN</span><span class="en-text">Where do you come from?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Vengo dal Brasile / dalla Germania / dall'Italia.</span><span class="label">EN</span><span class="en-text">I come from Brazil / Germany / Italy.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Sono di ___, ma vivo a ___.</span><span class="label">EN</span><span class="en-text">I am from ___, but I live in ___.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Vivo a Berlino da qualche anno.</span><span class="label">EN</span><span class="en-text">I have lived in Berlin for a few years.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Da quanto tempo vivi qui?</span><span class="label">EN</span><span class="en-text">How long have you lived here?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Vivo qui da qualche anno.</span><span class="label">EN</span><span class="en-text">I have lived here for a few years.</span></div>
+        </div>
+        <div class="card">
+          <h3>3. Lavoro</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Che lavoro fai?</span><span class="label">EN</span><span class="en-text">What do you do for work?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Lavoro come sviluppatore software.</span><span class="label">EN</span><span class="en-text">I work as a software developer.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Di cosa ti occupi?</span><span class="label">EN</span><span class="en-text">What do you work on?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Mi occupo di robotica / app Android / videogiochi.</span><span class="label">EN</span><span class="en-text">I work on robotics / Android apps / videogames.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Sono sviluppatore software.</span><span class="label">EN</span><span class="en-text">I am a software developer.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Lavoro da remoto.</span><span class="label">EN</span><span class="en-text">I work remotely.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Mi piace il mio lavoro, anche se a volte &egrave; stressante.</span><span class="label">EN</span><span class="en-text">I like my job, even though sometimes it is stressful.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Mi piace creare cose e risolvere problemi.</span><span class="label">EN</span><span class="en-text">I like creating things and solving problems.</span></div>
+        </div>
+        <div class="card">
+          <h3>4. Hobby e tempo libero</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Cosa ti piace fare nel tempo libero?</span><span class="label">EN</span><span class="en-text">What do you like doing in your free time?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Mi piace disegnare.</span><span class="label">EN</span><span class="en-text">I like drawing.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Hai qualche hobby?</span><span class="label">EN</span><span class="en-text">Do you have any hobbies?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">S&igrave;, mi piace disegnare e creare giochi.</span><span class="label">EN</span><span class="en-text">Yes, I like drawing and making games.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Mi piace dipingere.</span><span class="label">EN</span><span class="en-text">I like painting.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Mi piace creare giochi.</span><span class="label">EN</span><span class="en-text">I like making games.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Mi piace scrivere storie.</span><span class="label">EN</span><span class="en-text">I like writing stories.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Nel tempo libero disegno, dipingo e creo giochi.</span><span class="label">EN</span><span class="en-text">In my free time I draw, paint, and make games.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ultimamente sto imparando l'italiano.</span><span class="label">EN</span><span class="en-text">Recently I am learning Italian.</span></div>
+        </div>
+        <div class="card">
+          <h3>5. Parlare della giornata</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Com'&egrave; andata oggi?</span><span class="label">EN</span><span class="en-text">How did today go?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Oggi &egrave; stata una giornata tranquilla.</span><span class="label">EN</span><span class="en-text">Today was a quiet day.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Che hai fatto oggi?</span><span class="label">EN</span><span class="en-text">What did you do today?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Oggi ho lavorato e ho studiato italiano.</span><span class="label">EN</span><span class="en-text">Today I worked and studied Italian.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Oggi &egrave; stata una giornata pesante.</span><span class="label">EN</span><span class="en-text">Today was a tiring day.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ho avuto un sacco di cose da fare.</span><span class="label">EN</span><span class="en-text">I had a lot of things to do.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Adesso mi rilasso un po'.</span><span class="label">EN</span><span class="en-text">Now I am relaxing a bit.</span></div>
+          <div class="tip"><strong>Schema:</strong> oggi ho + participio passato: <em>oggi ho lavorato</em>, <em>oggi ho cucinato</em>, <em>oggi ho studiato italiano</em>, <em>oggi ho fatto una passeggiata</em>.</div>
+        </div>
+        <div class="card">
+          <h3>6. Reazioni e domande di seguito</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Italiano</th><th>English</th><th>Risposta possibile</th><th>Possible answer</th><th>Uso</th></tr></thead>
+              <tbody>
+                <tr><td>Davvero?</td><td>Really?</td><td>S&igrave;, davvero.</td><td>Yes, really.</td><td>show interest</td></tr>
+                <tr><td>Che bello!</td><td>That is nice!</td><td>Grazie, sono contento / contenta.</td><td>Thanks, I am happy.</td><td>positive reaction</td></tr>
+                <tr><td>Interessante!</td><td>Interesting!</td><td>S&igrave;, &egrave; molto interessante.</td><td>Yes, it is very interesting.</td><td>neutral reaction</td></tr>
+                <tr><td>Capisco.</td><td>I understand.</td><td>S&igrave;, esatto.</td><td>Yes, exactly.</td><td>acknowledge</td></tr>
+                <tr><td>Anch'io.</td><td>Me too.</td><td>Che bello, abbiamo qualcosa in comune.</td><td>Nice, we have something in common.</td><td>same for you</td></tr>
+                <tr><td>Neanch'io.</td><td>Me neither.</td><td>Allora siamo in due.</td><td>Then there are two of us.</td><td>same negative</td></tr>
+                <tr><td>Ah s&igrave;? E com'&egrave;?</td><td>Oh yeah? What is it like?</td><td>&Egrave; interessante, ma un po' difficile.</td><td>It is interesting, but a bit difficult.</td><td>best follow-up</td></tr>
+                <tr><td>Da quanto tempo?</td><td>For how long?</td><td>Da qualche anno.</td><td>For a few years.</td><td>continue the topic</td></tr>
+                <tr><td>Come mai?</td><td>How come?</td><td>Perch&eacute; mi piace molto.</td><td>Because I like it a lot.</td><td>ask why naturally</td></tr>
+                <tr><td>In che senso?</td><td>What do you mean?</td><td>Voglio dire che parlare &egrave; difficile.</td><td>I mean that speaking is difficult.</td><td>clarify</td></tr>
+                <tr><td>Tipo?</td><td>Like what?</td><td>Tipo disegnare e creare giochi.</td><td>For example, drawing and making games.</td><td>ask for example</td></tr>
+                <tr><td>E poi?</td><td>And then?</td><td>Poi sono tornato / tornata a casa.</td><td>Then I went home.</td><td>keep story going</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <h3>7. Preferenze e opinioni</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Mi piace molto ___.</span><span class="label">EN</span><span class="en-text">I really like ___.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Non mi piace molto ___.</span><span class="label">EN</span><span class="en-text">I do not like ___ much.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Preferisco ___.</span><span class="label">EN</span><span class="en-text">I prefer ___.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Lo trovo interessante / difficile / divertente.</span><span class="label">EN</span><span class="en-text">I find it interesting / difficult / fun.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Secondo me &egrave; interessante, per&ograve; non &egrave; per tutti.</span><span class="label">EN</span><span class="en-text">In my opinion it is interesting, but it is not for everyone.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Sono d'accordo / Non sono d'accordo.</span><span class="label">EN</span><span class="en-text">I agree / I disagree.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Dipende.</span><span class="label">EN</span><span class="en-text">It depends.</span></div>
+        </div>
+        <div class="card">
+          <h3>8. Cibo e ristorante</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Sono vegano / vegana.</span><span class="label">EN</span><span class="en-text">I am vegan.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Non mangio carne, pesce, uova o latticini.</span><span class="label">EN</span><span class="en-text">I do not eat meat, fish, eggs, or dairy.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Avete opzioni vegane?</span><span class="label">EN</span><span class="en-text">Do you have vegan options?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">S&igrave;, abbiamo pasta con verdure e insalata.</span><span class="label">EN</span><span class="en-text">Yes, we have pasta with vegetables and salad.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Questo &egrave; vegano?</span><span class="label">EN</span><span class="en-text">Is this vegan?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">S&igrave;, &egrave; vegano. Non contiene latticini.</span><span class="label">EN</span><span class="en-text">Yes, it is vegan. It does not contain dairy.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Senza formaggio, per favore.</span><span class="label">EN</span><span class="en-text">Without cheese, please.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Vorrei qualcosa di vegano. Cosa mi consigli?</span><span class="label">EN</span><span class="en-text">I would like something vegan. What do you recommend?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ti consiglio la pasta con verdure.</span><span class="label">EN</span><span class="en-text">I recommend the pasta with vegetables.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Non bevo caff&egrave;. Preferisco il t&egrave;.</span><span class="label">EN</span><span class="en-text">I do not drink coffee. I prefer tea.</span></div>
+        </div>
+        <div class="card">
+          <h3>9. Fare piani</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Hai programmi per stasera?</span><span class="label">EN</span><span class="en-text">Do you have plans tonight?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">No, stasera sono libero.</span><span class="label">EN</span><span class="en-text">No, I am free tonight.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ti va di fare qualcosa?</span><span class="label">EN</span><span class="en-text">Do you feel like doing something?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">S&igrave;, volentieri.</span><span class="label">EN</span><span class="en-text">Yes, gladly.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ti va di fare una passeggiata?</span><span class="label">EN</span><span class="en-text">Do you feel like going for a walk?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">S&igrave;, volentieri. Facciamo una passeggiata.</span><span class="label">EN</span><span class="en-text">Yes, gladly. Let us go for a walk.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Quando sei libero?</span><span class="label">EN</span><span class="en-text">When are you free?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Sono libero stasera / domani pomeriggio.</span><span class="label">EN</span><span class="en-text">I am free tonight / tomorrow afternoon.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Per me va bene.</span><span class="label">EN</span><span class="en-text">That works for me.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">A che ora ci vediamo?</span><span class="label">EN</span><span class="en-text">What time shall we meet?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ci vediamo alle sette.</span><span class="label">EN</span><span class="en-text">Let us meet at seven.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ci sentiamo dopo.</span><span class="label">EN</span><span class="en-text">We will talk later.</span></div>
+        </div>
+        <div class="card">
+          <h3>10. Quando non capisci</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Scusa, non ho capito.</span><span class="label">EN</span><span class="en-text">Sorry, I did not understand.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Puoi ripetere?</span><span class="label">EN</span><span class="en-text">Can you repeat?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Certo, lo ripeto.</span><span class="label">EN</span><span class="en-text">Of course, I will repeat it.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Puoi parlare pi&ugrave; lentamente?</span><span class="label">EN</span><span class="en-text">Can you speak more slowly?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Certo, parlo pi&ugrave; lentamente.</span><span class="label">EN</span><span class="en-text">Of course, I will speak more slowly.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Puoi scriverlo?</span><span class="label">EN</span><span class="en-text">Can you write it down?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">S&igrave;, te lo scrivo.</span><span class="label">EN</span><span class="en-text">Yes, I will write it down for you.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Come si dice "___" in italiano?</span><span class="label">EN</span><span class="en-text">How do you say "___" in Italian?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Si dice "___".</span><span class="label">EN</span><span class="en-text">You say "___".</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Cosa significa questa parola?</span><span class="label">EN</span><span class="en-text">What does this word mean?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Significa "___".</span><span class="label">EN</span><span class="en-text">It means "___".</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Un attimo, sto cercando le parole.</span><span class="label">EN</span><span class="en-text">One second, I am looking for the words.</span></div>
+        </div>
+        <div class="card">
+          <h3>11. Imparare l'italiano</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Sto imparando l'italiano.</span><span class="label">EN</span><span class="en-text">I am learning Italian.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Studio italiano da poco.</span><span class="label">EN</span><span class="en-text">I have been studying Italian for a short time.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Vorrei parlare meglio.</span><span class="label">EN</span><span class="en-text">I would like to speak better.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Capisco un po', ma parlare &egrave; pi&ugrave; difficile.</span><span class="label">EN</span><span class="en-text">I understand a little, but speaking is harder.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Faccio ancora molti errori.</span><span class="label">EN</span><span class="en-text">I still make many mistakes.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Puoi correggermi?</span><span class="label">EN</span><span class="en-text">Can you correct me?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Certo, ti correggo volentieri.</span><span class="label">EN</span><span class="en-text">Of course, I will gladly correct you.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Sto imparando l'italiano perch&eacute; mi piace la lingua e voglio riuscire a fare conversazioni normali.</span><span class="label">EN</span><span class="en-text">I am learning Italian because I like the language and want to be able to have normal conversations.</span></div>
+        </div>
+        <div class="card">
+          <h3>12. Conversazione esempio</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ciao, come va?</span><span class="label">EN</span><span class="en-text">Hi, how is it going?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Bene, grazie. E tu?</span><span class="label">EN</span><span class="en-text">Good, thanks. And you?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Bene anch'io. Di dove sei?</span><span class="label">EN</span><span class="en-text">Good too. Where are you from?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Sono di ___, ma vivo a Berlino.</span><span class="label">EN</span><span class="en-text">I am from ___, but I live in Berlin.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ah, che bello. Da quanto tempo vivi l&igrave;?</span><span class="label">EN</span><span class="en-text">Oh, how nice. How long have you lived there?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Da qualche anno. Mi piace molto, anche se l'inverno &egrave; un po' grigio.</span><span class="label">EN</span><span class="en-text">For a few years. I like it a lot, even though the winter is a bit gray.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Che lavoro fai?</span><span class="label">EN</span><span class="en-text">What do you do for work?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Sono sviluppatore software. Mi occupo soprattutto di app Android.</span><span class="label">EN</span><span class="en-text">I am a software developer. I mostly work on Android apps.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Interessante. Ti piace?</span><span class="label">EN</span><span class="en-text">Interesting. Do you like it?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">S&igrave;, molto. Mi piace creare cose e risolvere problemi. E tu, di cosa ti occupi?</span><span class="label">EN</span><span class="en-text">Yes, a lot. I like creating things and solving problems. And you, what do you do?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Io lavoro come designer e mi occupo di prodotti digitali.</span><span class="label">EN</span><span class="en-text">I work as a designer and work on digital products.</span></div>
+          <div class="warning"><strong>Le prime cinque frasi da imparare:</strong> <em>E tu?</em> | <em>Ah s&igrave;? E com'&egrave;?</em> | <em>Da quanto tempo?</em> | <em>Mi piace molto ___.</em> | <em>Scusa, puoi ripetere pi&ugrave; lentamente?</em></div>
         </div>
         <div class="card">
           <h3>Vocabulary</h3>
@@ -1139,10 +1517,281 @@
             <table>
               <thead><tr><th>Italiano</th><th>English</th></tr></thead>
               <tbody>
-                <tr><td>lavorare</td><td>to work</td></tr><tr><td>mangiare</td><td>to eat</td></tr><tr><td>bere</td><td>to drink</td></tr><tr><td>venire</td><td>to come</td></tr><tr><td>stare</td><td>to stay / to be (state)</td></tr><tr><td>bene</td><td>well (adverb &mdash; invariable)</td></tr><tr><td>ieri</td><td>yesterday</td></tr><tr><td>un libro</td><td>a book</td></tr><tr><td>stella alpina</td><td>edelweiss</td></tr>
+                <tr><td>lavorare</td><td>to work</td></tr>
+                <tr><td>occuparsi di</td><td>to deal with / work on</td></tr>
+                <tr><td>sviluppatore software</td><td>software developer</td></tr>
+                <tr><td>disegnare</td><td>to draw</td></tr>
+                <tr><td>dipingere</td><td>to paint</td></tr>
+                <tr><td>creare giochi</td><td>to make games</td></tr>
+                <tr><td>scrivere storie</td><td>to write stories</td></tr>
+                <tr><td>tempo libero</td><td>free time</td></tr>
+                <tr><td>passeggiata</td><td>walk</td></tr>
+                <tr><td>programmi</td><td>plans</td></tr>
+                <tr><td>lento / lentamente</td><td>slow / slowly</td></tr>
+                <tr><td>ripetere</td><td>to repeat</td></tr>
+                <tr><td>capire</td><td>to understand</td></tr>
+                <tr><td>correggere</td><td>to correct</td></tr>
+                <tr><td>vegano / vegana</td><td>vegan</td></tr>
+                <tr><td>latticini</td><td>dairy products</td></tr>
+                <tr><td>senza</td><td>without</td></tr>
+                <tr><td>consigliare</td><td>to recommend</td></tr>
+                <tr><td>andare</td><td>to go</td></tr>
+                <tr><td>venire</td><td>to come</td></tr>
+                <tr><td>stare</td><td>to stay / to be (state)</td></tr>
+                <tr><td>bene</td><td>well (adverb &mdash; invariable)</td></tr>
+                <tr><td>ieri</td><td>yesterday</td></tr>
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+
+      <!-- ══ CONVERSATION VERBS ══ -->
+      <div class="panel" id="panel-conversation-verbs">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('phrases')">&larr;</button>
+          <h2>Verbi del Metodo &mdash; Coniugazione Completa</h2>
+        </div>
+        <div class="card">
+          <h3>How to read these tables</h3>
+          <p>The main table gives the complete simple forms you need to speak. The compound tenses are built with the auxiliary shown in the second table: passato prossimo, trapassato prossimo, futuro anteriore, condizionale passato, congiuntivo passato, and congiuntivo trapassato.</p>
+          <div class="tip"><strong>Agreement:</strong> with <em>essere</em>, the past participle changes for gender and number: <em>andato, andata, andati, andate</em>.</div>
+        </div>
+        <div class="card" id="verb-essere">
+          <h3>Essere &mdash; to be</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>sono</td><td>sei</td><td>&egrave;</td><td>siamo</td><td>siete</td><td>sono</td></tr>
+            <tr><td>Imperfetto</td><td>ero</td><td>eri</td><td>era</td><td>eravamo</td><td>eravate</td><td>erano</td></tr>
+            <tr><td>Pass. remoto</td><td>fui</td><td>fosti</td><td>fu</td><td>fummo</td><td>foste</td><td>furono</td></tr>
+            <tr><td>Futuro</td><td>sar&ograve;</td><td>sarai</td><td>sar&agrave;</td><td>saremo</td><td>sarete</td><td>saranno</td></tr>
+            <tr><td>Condizionale</td><td>sarei</td><td>saresti</td><td>sarebbe</td><td>saremmo</td><td>sareste</td><td>sarebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>sia</td><td>sia</td><td>sia</td><td>siamo</td><td>siate</td><td>siano</td></tr>
+            <tr><td>Cong. imperf.</td><td>fossi</td><td>fossi</td><td>fosse</td><td>fossimo</td><td>foste</td><td>fossero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>sii!</td><td>sia!</td><td>siamo!</td><td>siate!</td><td>siano!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Passato prossimo</td><td>sono stato/a</td></tr>
+            <tr><td>Trapassato prossimo</td><td>ero stato/a</td></tr>
+            <tr><td>Futuro anteriore</td><td>sar&ograve; stato/a</td></tr>
+            <tr><td>Condizionale passato</td><td>sarei stato/a</td></tr>
+            <tr><td>Congiuntivo passato</td><td>sia stato/a</td></tr>
+            <tr><td>Congiuntivo trapassato</td><td>fossi stato/a</td></tr>
+            <tr><td>Modi indefiniti</td><td>essere | stato | essendo | essendo stato</td></tr>
+          </tbody></table></div>
+          <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">Sono di ___.</span><span class="label">EN</span><span class="en-text">I am from ___.</span></div>
+        </div>
+        <div class="card" id="verb-andare">
+          <h3>Andare &mdash; to go</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>vado</td><td>vai</td><td>va</td><td>andiamo</td><td>andate</td><td>vanno</td></tr>
+            <tr><td>Imperfetto</td><td>andavo</td><td>andavi</td><td>andava</td><td>andavamo</td><td>andavate</td><td>andavano</td></tr>
+            <tr><td>Pass. remoto</td><td>andai</td><td>andasti</td><td>and&ograve;</td><td>andammo</td><td>andaste</td><td>andarono</td></tr>
+            <tr><td>Futuro</td><td>andr&ograve;</td><td>andrai</td><td>andr&agrave;</td><td>andremo</td><td>andrete</td><td>andranno</td></tr>
+            <tr><td>Condizionale</td><td>andrei</td><td>andresti</td><td>andrebbe</td><td>andremmo</td><td>andreste</td><td>andrebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>vada</td><td>vada</td><td>vada</td><td>andiamo</td><td>andiate</td><td>vadano</td></tr>
+            <tr><td>Cong. imperf.</td><td>andassi</td><td>andassi</td><td>andasse</td><td>andassimo</td><td>andaste</td><td>andassero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>va'!</td><td>vada!</td><td>andiamo!</td><td>andate!</td><td>vadano!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>essere + andato/a/i/e</td></tr>
+            <tr><td>Passato prossimo</td><td>sono andato/a</td></tr>
+            <tr><td>Trapassato prossimo</td><td>ero andato/a</td></tr>
+            <tr><td>Futuro anteriore</td><td>sar&ograve; andato/a</td></tr>
+            <tr><td>Condizionale passato</td><td>sarei andato/a</td></tr>
+            <tr><td>Congiuntivo passato</td><td>sia andato/a</td></tr>
+            <tr><td>Modi indefiniti</td><td>andare | andato | andando | essendo andato</td></tr>
+          </tbody></table></div>
+          <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">Vado a casa.</span><span class="label">EN</span><span class="en-text">I am going home.</span></div>
+        </div>
+        <div class="card" id="verb-vivere">
+          <h3>Vivere &mdash; to live</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>vivo</td><td>vivi</td><td>vive</td><td>viviamo</td><td>vivete</td><td>vivono</td></tr>
+            <tr><td>Imperfetto</td><td>vivevo</td><td>vivevi</td><td>viveva</td><td>vivevamo</td><td>vivevate</td><td>vivevano</td></tr>
+            <tr><td>Pass. remoto</td><td>vissi</td><td>vivesti</td><td>visse</td><td>vivemmo</td><td>viveste</td><td>vissero</td></tr>
+            <tr><td>Futuro</td><td>vivr&ograve;</td><td>vivrai</td><td>vivr&agrave;</td><td>vivremo</td><td>vivrete</td><td>vivranno</td></tr>
+            <tr><td>Condizionale</td><td>vivrei</td><td>vivresti</td><td>vivrebbe</td><td>vivremmo</td><td>vivreste</td><td>vivrebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>viva</td><td>viva</td><td>viva</td><td>viviamo</td><td>viviate</td><td>vivano</td></tr>
+            <tr><td>Cong. imperf.</td><td>vivessi</td><td>vivessi</td><td>vivesse</td><td>vivessimo</td><td>viveste</td><td>vivessero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>vivi!</td><td>viva!</td><td>viviamo!</td><td>vivete!</td><td>vivano!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>avere + vissuto</td></tr>
+            <tr><td>Passato prossimo</td><td>ho vissuto</td></tr>
+            <tr><td>Trapassato prossimo</td><td>avevo vissuto</td></tr>
+            <tr><td>Futuro anteriore</td><td>avr&ograve; vissuto</td></tr>
+            <tr><td>Condizionale passato</td><td>avrei vissuto</td></tr>
+            <tr><td>Congiuntivo passato</td><td>abbia vissuto</td></tr>
+            <tr><td>Modi indefiniti</td><td>vivere | vissuto | vivendo | avendo vissuto</td></tr>
+          </tbody></table></div>
+          <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">Vivo a ___.</span><span class="label">EN</span><span class="en-text">I live in ___.</span></div>
+        </div>
+        <div class="card" id="verb-occuparsi">
+          <h3>Occuparsi di &mdash; to work on / deal with</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>mi occupo</td><td>ti occupi</td><td>si occupa</td><td>ci occupiamo</td><td>vi occupate</td><td>si occupano</td></tr>
+            <tr><td>Imperfetto</td><td>mi occupavo</td><td>ti occupavi</td><td>si occupava</td><td>ci occupavamo</td><td>vi occupavate</td><td>si occupavano</td></tr>
+            <tr><td>Pass. remoto</td><td>mi occupai</td><td>ti occupasti</td><td>si occup&ograve;</td><td>ci occupammo</td><td>vi occupaste</td><td>si occuparono</td></tr>
+            <tr><td>Futuro</td><td>mi occuper&ograve;</td><td>ti occuperai</td><td>si occuper&agrave;</td><td>ci occuperemo</td><td>vi occuperete</td><td>si occuperanno</td></tr>
+            <tr><td>Condizionale</td><td>mi occuperei</td><td>ti occuperesti</td><td>si occuperebbe</td><td>ci occuperemmo</td><td>vi occupereste</td><td>si occuperebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>mi occupi</td><td>ti occupi</td><td>si occupi</td><td>ci occupiamo</td><td>vi occupiate</td><td>si occupino</td></tr>
+            <tr><td>Cong. imperf.</td><td>mi occupassi</td><td>ti occupassi</td><td>si occupasse</td><td>ci occupassimo</td><td>vi occupaste</td><td>si occupassero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>occupati!</td><td>si occupi!</td><td>occupiamoci!</td><td>occupatevi!</td><td>si occupino!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>essere + occupato/a/i/e</td></tr>
+            <tr><td>Passato prossimo</td><td>mi sono occupato/a</td></tr>
+            <tr><td>Trapassato prossimo</td><td>mi ero occupato/a</td></tr>
+            <tr><td>Futuro anteriore</td><td>mi sar&ograve; occupato/a</td></tr>
+            <tr><td>Condizionale passato</td><td>mi sarei occupato/a</td></tr>
+            <tr><td>Congiuntivo passato</td><td>mi sia occupato/a</td></tr>
+            <tr><td>Modi indefiniti</td><td>occuparsi | occupato | occupandosi | essendosi occupato</td></tr>
+          </tbody></table></div>
+          <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">Mi occupo di app Android.</span><span class="label">EN</span><span class="en-text">I work on Android apps.</span></div>
+        </div>
+        <div class="card" id="verb-fare">
+          <h3>Fare &mdash; to do / make</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>faccio</td><td>fai</td><td>fa</td><td>facciamo</td><td>fate</td><td>fanno</td></tr>
+            <tr><td>Imperfetto</td><td>facevo</td><td>facevi</td><td>faceva</td><td>facevamo</td><td>facevate</td><td>facevano</td></tr>
+            <tr><td>Pass. remoto</td><td>feci</td><td>facesti</td><td>fece</td><td>facemmo</td><td>faceste</td><td>fecero</td></tr>
+            <tr><td>Futuro</td><td>far&ograve;</td><td>farai</td><td>far&agrave;</td><td>faremo</td><td>farete</td><td>faranno</td></tr>
+            <tr><td>Condizionale</td><td>farei</td><td>faresti</td><td>farebbe</td><td>faremmo</td><td>fareste</td><td>farebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>faccia</td><td>faccia</td><td>faccia</td><td>facciamo</td><td>facciate</td><td>facciano</td></tr>
+            <tr><td>Cong. imperf.</td><td>facessi</td><td>facessi</td><td>facesse</td><td>facessimo</td><td>faceste</td><td>facessero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>fa'!</td><td>faccia!</td><td>facciamo!</td><td>fate!</td><td>facciano!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>avere + fatto</td></tr>
+            <tr><td>Passato prossimo</td><td>ho fatto</td></tr>
+            <tr><td>Trapassato prossimo</td><td>avevo fatto</td></tr>
+            <tr><td>Futuro anteriore</td><td>avr&ograve; fatto</td></tr>
+            <tr><td>Condizionale passato</td><td>avrei fatto</td></tr>
+            <tr><td>Congiuntivo passato</td><td>abbia fatto</td></tr>
+            <tr><td>Modi indefiniti</td><td>fare | fatto | facendo | avendo fatto</td></tr>
+          </tbody></table></div>
+          <div class="example" style="margin-top:12px"><span class="label">IT</span><span class="it-text">Che lavoro fai?</span><span class="label">EN</span><span class="en-text">What do you do for work?</span></div>
+        </div>
+        <div class="card" id="verb-piacere">
+          <h3>Piacere &mdash; to like</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>piaccio</td><td>piaci</td><td>piace</td><td>piacciamo</td><td>piacete</td><td>piacciono</td></tr>
+            <tr><td>Imperfetto</td><td>piacevo</td><td>piacevi</td><td>piaceva</td><td>piacevamo</td><td>piacevate</td><td>piacevano</td></tr>
+            <tr><td>Pass. remoto</td><td>piacqui</td><td>piacesti</td><td>piacque</td><td>piacemmo</td><td>piaceste</td><td>piacquero</td></tr>
+            <tr><td>Futuro</td><td>piacer&ograve;</td><td>piacerai</td><td>piacer&agrave;</td><td>piaceremo</td><td>piacerete</td><td>piaceranno</td></tr>
+            <tr><td>Condizionale</td><td>piacerei</td><td>piaceresti</td><td>piacerebbe</td><td>piaceremmo</td><td>piacereste</td><td>piacerebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>piaccia</td><td>piaccia</td><td>piaccia</td><td>piacciamo</td><td>piacciate</td><td>piacciano</td></tr>
+            <tr><td>Cong. imperf.</td><td>piacessi</td><td>piacessi</td><td>piacesse</td><td>piacessimo</td><td>piaceste</td><td>piacessero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>piaci!</td><td>piaccia!</td><td>piacciamo!</td><td>piacete!</td><td>piacciano!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Practical pattern</th><th>One thing</th><th>Multiple things</th></tr></thead><tbody>
+            <tr><td>a me</td><td>mi piace</td><td>mi piacciono</td></tr>
+            <tr><td>a te</td><td>ti piace</td><td>ti piacciono</td></tr>
+            <tr><td>a lui/lei</td><td>gli/le piace</td><td>gli/le piacciono</td></tr>
+            <tr><td>a noi</td><td>ci piace</td><td>ci piacciono</td></tr>
+            <tr><td>a voi</td><td>vi piace</td><td>vi piacciono</td></tr>
+            <tr><td>a loro</td><td>gli piace</td><td>gli piacciono</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>essere + piaciuto/a/i/e</td></tr>
+            <tr><td>Passato prossimo</td><td>sono piaciuto/a | mi &egrave; piaciuto</td></tr>
+            <tr><td>Trapassato prossimo</td><td>ero piaciuto/a | mi era piaciuto</td></tr>
+            <tr><td>Futuro anteriore</td><td>sar&ograve; piaciuto/a | mi sar&agrave; piaciuto</td></tr>
+            <tr><td>Condizionale passato</td><td>sarei piaciuto/a | mi sarebbe piaciuto</td></tr>
+            <tr><td>Congiuntivo passato</td><td>sia piaciuto/a | mi sia piaciuto</td></tr>
+            <tr><td>Modi indefiniti</td><td>piacere | piaciuto | piacendo | essendo piaciuto</td></tr>
+          </tbody></table></div>
+          <div class="tip"><strong>Pattern:</strong> Italian says something like "drawing is pleasing to me": <em>mi piace disegnare</em>.</div>
+        </div>
+        <div class="card" id="verb-disegnare">
+          <h3>Disegnare &mdash; to draw</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>disegno</td><td>disegni</td><td>disegna</td><td>disegniamo</td><td>disegnate</td><td>disegnano</td></tr>
+            <tr><td>Imperfetto</td><td>disegnavo</td><td>disegnavi</td><td>disegnava</td><td>disegnavamo</td><td>disegnavate</td><td>disegnavano</td></tr>
+            <tr><td>Pass. remoto</td><td>disegnai</td><td>disegnasti</td><td>disegn&ograve;</td><td>disegnammo</td><td>disegnaste</td><td>disegnarono</td></tr>
+            <tr><td>Futuro</td><td>disegner&ograve;</td><td>disegnerai</td><td>disegner&agrave;</td><td>disegneremo</td><td>disegnerete</td><td>disegneranno</td></tr>
+            <tr><td>Condizionale</td><td>disegnerei</td><td>disegneresti</td><td>disegnerebbe</td><td>disegneremmo</td><td>disegnereste</td><td>disegnerebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>disegni</td><td>disegni</td><td>disegni</td><td>disegniamo</td><td>disegniate</td><td>disegnino</td></tr>
+            <tr><td>Cong. imperf.</td><td>disegnassi</td><td>disegnassi</td><td>disegnasse</td><td>disegnassimo</td><td>disegnaste</td><td>disegnassero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>disegna!</td><td>disegni!</td><td>disegniamo!</td><td>disegnate!</td><td>disegnino!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>avere + disegnato</td></tr>
+            <tr><td>Passato prossimo</td><td>ho disegnato</td></tr>
+            <tr><td>Trapassato prossimo</td><td>avevo disegnato</td></tr>
+            <tr><td>Futuro anteriore</td><td>avr&ograve; disegnato</td></tr>
+            <tr><td>Condizionale passato</td><td>avrei disegnato</td></tr>
+            <tr><td>Congiuntivo passato</td><td>abbia disegnato</td></tr>
+            <tr><td>Modi indefiniti</td><td>disegnare | disegnato | disegnando | avendo disegnato</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="card" id="verb-creare">
+          <h3>Creare &mdash; to create</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>creo</td><td>crei</td><td>crea</td><td>creiamo</td><td>create</td><td>creano</td></tr>
+            <tr><td>Imperfetto</td><td>creavo</td><td>creavi</td><td>creava</td><td>creavamo</td><td>creavate</td><td>creavano</td></tr>
+            <tr><td>Pass. remoto</td><td>creai</td><td>creasti</td><td>cre&ograve;</td><td>creammo</td><td>creaste</td><td>crearono</td></tr>
+            <tr><td>Futuro</td><td>creer&ograve;</td><td>creerai</td><td>creer&agrave;</td><td>creeremo</td><td>creerete</td><td>creeranno</td></tr>
+            <tr><td>Condizionale</td><td>creerei</td><td>creeresti</td><td>creerebbe</td><td>creeremmo</td><td>creereste</td><td>creerebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>crei</td><td>crei</td><td>crei</td><td>creiamo</td><td>creiate</td><td>creino</td></tr>
+            <tr><td>Cong. imperf.</td><td>creassi</td><td>creassi</td><td>creasse</td><td>creassimo</td><td>creaste</td><td>creassero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>crea!</td><td>crei!</td><td>creiamo!</td><td>create!</td><td>creino!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>avere + creato</td></tr>
+            <tr><td>Passato prossimo</td><td>ho creato</td></tr>
+            <tr><td>Trapassato prossimo</td><td>avevo creato</td></tr>
+            <tr><td>Futuro anteriore</td><td>avr&ograve; creato</td></tr>
+            <tr><td>Condizionale passato</td><td>avrei creato</td></tr>
+            <tr><td>Congiuntivo passato</td><td>abbia creato</td></tr>
+            <tr><td>Modi indefiniti</td><td>creare | creato | creando | avendo creato</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="card" id="verb-stare">
+          <h3>Stare &mdash; to be / stay</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>sto</td><td>stai</td><td>sta</td><td>stiamo</td><td>state</td><td>stanno</td></tr>
+            <tr><td>Imperfetto</td><td>stavo</td><td>stavi</td><td>stava</td><td>stavamo</td><td>stavate</td><td>stavano</td></tr>
+            <tr><td>Pass. remoto</td><td>stetti</td><td>stesti</td><td>stette</td><td>stemmo</td><td>steste</td><td>stettero</td></tr>
+            <tr><td>Futuro</td><td>star&ograve;</td><td>starai</td><td>star&agrave;</td><td>staremo</td><td>starete</td><td>staranno</td></tr>
+            <tr><td>Condizionale</td><td>starei</td><td>staresti</td><td>starebbe</td><td>staremmo</td><td>stareste</td><td>starebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>stia</td><td>stia</td><td>stia</td><td>stiamo</td><td>stiate</td><td>stiano</td></tr>
+            <tr><td>Cong. imperf.</td><td>stessi</td><td>stessi</td><td>stesse</td><td>stessimo</td><td>steste</td><td>stessero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>sta'!</td><td>stia!</td><td>stiamo!</td><td>state!</td><td>stiano!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>essere + stato/a/i/e</td></tr>
+            <tr><td>Passato prossimo</td><td>sono stato/a</td></tr>
+            <tr><td>Trapassato prossimo</td><td>ero stato/a</td></tr>
+            <tr><td>Futuro anteriore</td><td>sar&ograve; stato/a</td></tr>
+            <tr><td>Condizionale passato</td><td>sarei stato/a</td></tr>
+            <tr><td>Congiuntivo passato</td><td>sia stato/a</td></tr>
+            <tr><td>Modi indefiniti</td><td>stare | stato | stando | essendo stato</td></tr>
+          </tbody></table></div>
+          <div class="tip"><strong>For progressive actions:</strong> use <em>stare + gerundio</em>, as in <em>sto studiando</em>.</div>
+        </div>
+        <div class="card" id="verb-studiare">
+          <h3>Studiare &mdash; to study</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo / Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>studio</td><td>studi</td><td>studia</td><td>studiamo</td><td>studiate</td><td>studiano</td></tr>
+            <tr><td>Imperfetto</td><td>studiavo</td><td>studiavi</td><td>studiava</td><td>studiavamo</td><td>studiavate</td><td>studiavano</td></tr>
+            <tr><td>Pass. remoto</td><td>studiai</td><td>studiasti</td><td>studi&ograve;</td><td>studiammo</td><td>studiaste</td><td>studiarono</td></tr>
+            <tr><td>Futuro</td><td>studier&ograve;</td><td>studierai</td><td>studier&agrave;</td><td>studieremo</td><td>studierete</td><td>studieranno</td></tr>
+            <tr><td>Condizionale</td><td>studierei</td><td>studieresti</td><td>studierebbe</td><td>studieremmo</td><td>studiereste</td><td>studierebbero</td></tr>
+            <tr><td>Cong. pres.</td><td>studi</td><td>studi</td><td>studi</td><td>studiamo</td><td>studiate</td><td>studino</td></tr>
+            <tr><td>Cong. imperf.</td><td>studiassi</td><td>studiassi</td><td>studiasse</td><td>studiassimo</td><td>studiaste</td><td>studiassero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>studia!</td><td>studi!</td><td>studiamo!</td><td>studiate!</td><td>studino!</td></tr>
+          </tbody></table></div>
+          <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Compound pattern</th><th>Form</th></tr></thead><tbody>
+            <tr><td>Auxiliary + participle</td><td>avere + studiato</td></tr>
+            <tr><td>Passato prossimo</td><td>ho studiato</td></tr>
+            <tr><td>Trapassato prossimo</td><td>avevo studiato</td></tr>
+            <tr><td>Futuro anteriore</td><td>avr&ograve; studiato</td></tr>
+            <tr><td>Condizionale passato</td><td>avrei studiato</td></tr>
+            <tr><td>Congiuntivo passato</td><td>abbia studiato</td></tr>
+            <tr><td>Modi indefiniti</td><td>studiare | studiato | studiando | avendo studiato</td></tr>
+            <tr><td>Progressivo</td><td>sto studiando</td></tr>
+          </tbody></table></div>
         </div>
       </div>
 
@@ -1150,7 +1799,7 @@
       <div class="panel" id="panel-present-prog">
         <div class="panel-header">
           <button class="back" onclick="showPanel('home')">&larr;</button>
-          <h2>Presente Progressivo</h2>
+          <h2>Progressivo: stare + gerundio</h2>
         </div>
         <div class="card">
           <h3>stare + gerundio</h3>
@@ -1230,7 +1879,7 @@
       <div class="panel" id="panel-amare">
         <div class="panel-header">
           <button class="back" onclick="showPanel('home')">&larr;</button>
-          <h2>1&ordf; Coniugazione &mdash; ARE</h2>
+          <h2>1&ordf; coniugazione &mdash; ARE (amare)</h2>
         </div>
         <div class="card">
           <h3>Amare = to love</h3>
@@ -1260,7 +1909,7 @@
       <div class="panel" id="panel-temere">
         <div class="panel-header">
           <button class="back" onclick="showPanel('home')">&larr;</button>
-          <h2>2&ordf; Coniugazione &mdash; ERE</h2>
+          <h2>2&ordf; coniugazione &mdash; ERE (temere)</h2>
         </div>
         <div class="card">
           <h3>Temere = to fear</h3>
@@ -1283,7 +1932,7 @@
       <div class="panel" id="panel-sentire">
         <div class="panel-header">
           <button class="back" onclick="showPanel('home')">&larr;</button>
-          <h2>3&ordf; Coniugazione &mdash; IRE</h2>
+          <h2>3&ordf; coniugazione &mdash; IRE (sentire)</h2>
         </div>
         <div class="card">
           <h3>Sentire = to hear / to feel</h3>
@@ -1305,7 +1954,7 @@
       <div class="panel" id="panel-irregular">
         <div class="panel-header">
           <button class="back" onclick="showPanel('home')">&larr;</button>
-          <h2>Verbi Irregolari</h2>
+          <h2>Verbi irregolari</h2>
         </div>
         <div class="card">
           <h3>Stare &mdash; to stay / to be</h3>
@@ -1333,7 +1982,7 @@
       <div class="panel" id="panel-reflexive">
         <div class="panel-header">
           <button class="back" onclick="showPanel('home')">&larr;</button>
-          <h2>Verbi Riflessivi</h2>
+          <h2>Verbi riflessivi</h2>
         </div>
         <div class="card">
           <h3>Lavarsi &mdash; to wash oneself</h3>
@@ -1396,11 +2045,106 @@
 </div><!-- /shell -->
 
 <script>
-function showPanel(id) {
+const APP_STATE_KEY = 'italian-guide-state-v1';
+let appState = loadAppState();
+let pendingScrollSave = false;
+
+function loadAppState() {
+  try {
+    return JSON.parse(localStorage.getItem(APP_STATE_KEY)) || {};
+  } catch {
+    return {};
+  }
+}
+
+function saveAppState() {
+  try {
+    localStorage.setItem(APP_STATE_KEY, JSON.stringify(appState));
+  } catch {
+    // Storage can be unavailable in private or restricted browser contexts.
+  }
+}
+
+function updateAppState(next) {
+  appState = { ...appState, ...next };
+  saveAppState();
+}
+
+function panelExists(id) {
+  return !!document.getElementById('panel-' + id);
+}
+
+function getActivePanelId() {
+  const active = document.querySelector('.panel.active');
+  return active ? active.id.replace(/^panel-/, '') : 'home';
+}
+
+function getInitialPanelId() {
+  const hash = window.location.hash.replace(/^#/, '').replace(/^panel-/, '');
+  if (panelExists(hash)) return hash;
+  if (panelExists(appState.panel)) return appState.panel;
+  return 'home';
+}
+
+function rememberScrollPosition() {
+  const content = document.getElementById('content');
+  const panel = getActivePanelId();
+  appState.panelScroll = { ...(appState.panelScroll || {}), [panel]: content.scrollTop };
+  saveAppState();
+}
+
+function escapeAttr(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function toggleStudySide(button) {
+  const row = button.closest('.study-row');
+  if (!row) return;
+  const open = !row.classList.contains('vocab-open');
+  row.classList.toggle('vocab-open', open);
+  button.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
+function setStudyTab(tab, options = {}) {
+  const side = tab.closest('.study-side');
+  if (!side) return;
+  const selected = tab.dataset.studyTab;
+  side.querySelectorAll('.study-tab').forEach(btn => {
+    const active = btn === tab;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+  side.querySelectorAll('.study-tab-panel').forEach(panel => {
+    panel.classList.toggle('active', panel.dataset.studyPanel === selected);
+  });
+
+  if (options.persist === false) return;
+  const panel = side.closest('.panel');
+  if (!panel) return;
+  const panelId = panel.id.replace(/^panel-/, '');
+  appState.studyTabs = { ...(appState.studyTabs || {}), [panelId]: selected };
+  saveAppState();
+}
+
+function restoreStudyTabs() {
+  Object.entries(appState.studyTabs || {}).forEach(([panelId, selected]) => {
+    const tab = document.querySelector(`#panel-${panelId} .study-tab[data-study-tab="${selected}"]`);
+    if (tab) setStudyTab(tab, { persist: false });
+  });
+}
+
+function showPanel(id, options = {}) {
+  const panelId = panelExists(id) ? id : 'home';
+  if (!options.restoreScroll) rememberScrollPosition();
+
   // Hide all panels
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   // Show target
-  const target = document.getElementById('panel-' + id);
+  const target = document.getElementById('panel-' + panelId);
   if (target) {
     target.classList.add('active');
     // Re-trigger animation
@@ -1410,12 +2154,32 @@ function showPanel(id) {
   }
   // Update sidebar active state
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const navItem = document.querySelector(`.nav-item[data-panel="${id}"]`);
+  const navItem = document.querySelector(`.nav-item[data-panel="${panelId}"]`);
   if (navItem) navItem.classList.add('active');
-  // Scroll content to top
-  document.getElementById('content').scrollTop = 0;
+  // Restore the previous reading position only during page startup.
+  const content = document.getElementById('content');
+  const savedScroll = appState.panelScroll && appState.panelScroll[panelId];
+  const nextScroll = options.restoreScroll ? (savedScroll || 0) : 0;
+  content.scrollTop = nextScroll;
+  if (options.restoreScroll) {
+    requestAnimationFrame(() => { content.scrollTop = nextScroll; });
+  }
   // Close mobile sidebar
   closeSidebar();
+  updateAppState({ panel: panelId });
+
+  const nextHash = '#' + panelId;
+  if (window.location.hash !== nextHash) {
+    history.replaceState(null, '', nextHash);
+  }
+
+  if (options.focusId) {
+    requestAnimationFrame(() => {
+      const focusTarget = document.getElementById(options.focusId);
+      if (!focusTarget) return;
+      content.scrollTop = Math.max(0, focusTarget.offsetTop - content.offsetTop - 8);
+    });
+  }
 }
 
 // Sidebar nav clicks
@@ -1439,6 +2203,15 @@ function closeSidebar() {
 // Keyboard navigation
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') showPanel('home');
+});
+
+document.getElementById('content').addEventListener('scroll', () => {
+  if (pendingScrollSave) return;
+  pendingScrollSave = true;
+  requestAnimationFrame(() => {
+    pendingScrollSave = false;
+    rememberScrollPosition();
+  });
 });
 
 // ═══════════════════════════════════════
@@ -1509,6 +2282,10 @@ const QUIZ = {
       ['#1a1a1a','nero'],['#c0392b','rosso'],['#f1c40f','giallo'],['#e8e8e0','bianco'],
       ['#5dade2','azzurro'],['#7f8c8d','grigio'],['#6d4c41','marrone'],['#e67e22','arancione'],
       ['#27ae60','verde'],['#1a3c7a','blu'],['#e88da8','rosa'],['#8e44ad','viola'],
+      ['#8fd3ff','celeste'],['#1abc9c','turchese'],['#008080','verde acqua'],['#f5f5dc','beige'],
+      ['#fff1cc','crema'],['#ffd700','oro'],['#c0c0c0','argento'],['#ff7f50','corallo'],
+      ['#ff00ff','magenta'],['#ff1493','fucsia'],['#800020','bordeaux'],['#4b0082','indaco'],
+      ['#c8a2c8','lilla'],['#00ffff','ciano'],['#808000','oliva'],['#000080','blu navy'],
     ],
   },
 
@@ -1527,6 +2304,7 @@ const QUIZ = {
     const area = document.getElementById('quiz-area');
     const gen = this['gen_'+this.mode];
     if (gen) gen.call(this, area);
+    saveQuizState();
   },
 
   answer(isCorrect, correctAnswer) {
@@ -1540,6 +2318,7 @@ const QUIZ = {
       this.streak = 0;
     }
     this.updateStats();
+    setTimeout(saveQuizState, 0);
   },
 
   // ── VOCAB ──
@@ -1593,7 +2372,7 @@ const QUIZ = {
           <div style="font-size:4.5rem;line-height:1;margin:12px 0;">${emoji}</div>
         </div>
         <div class="quiz-input-wrap">
-          <input class="quiz-input" id="vocab-input" placeholder="type in Italian..." autocomplete="off" autocapitalize="off" spellcheck="false">
+          <input class="quiz-input" id="vocab-input" placeholder="type in Italian..." autocomplete="off" autocapitalize="off" spellcheck="false" data-quiz-answer="${escapeAttr(italian)}" data-quiz-reveal="${escapeAttr(`<b>${italian}</b>`)}">
         </div>
         <div class="quiz-feedback" id="quiz-fb"></div>
       `;
@@ -1630,7 +2409,7 @@ const QUIZ = {
         <div class="q-hint">${pronoun} ___</div>
       </div>
       <div class="quiz-input-wrap">
-        <input class="quiz-input" id="conj-input" placeholder="type the form..." autocomplete="off" autocapitalize="off" spellcheck="false">
+        <input class="quiz-input" id="conj-input" placeholder="type the form..." autocomplete="off" autocapitalize="off" spellcheck="false" data-quiz-answer="${escapeAttr(answer)}" data-quiz-reveal="${escapeAttr(`${pronoun} <b>${answer}</b>`)}">
       </div>
       <div class="quiz-feedback" id="quiz-fb"></div>
     `;
@@ -1689,7 +2468,7 @@ const QUIZ = {
         <div class="q-word">${num.toLocaleString('it-IT')}</div>
       </div>
       <div class="quiz-input-wrap">
-        <input class="quiz-input" id="num-input" placeholder="type in Italian..." autocomplete="off" autocapitalize="off" spellcheck="false">
+        <input class="quiz-input" id="num-input" placeholder="type in Italian..." autocomplete="off" autocapitalize="off" spellcheck="false" data-quiz-answer="${escapeAttr(answer)}" data-quiz-reveal="${escapeAttr(`${num} = <b>${answer}</b>`) }">
       </div>
       <div class="quiz-feedback" id="quiz-fb"></div>
     `;
@@ -1733,6 +2512,60 @@ const QUIZ = {
   },
 };
 
+function saveQuizState() {
+  const area = document.getElementById('quiz-area');
+  appState.quiz = {
+    mode: QUIZ.mode,
+    correct: QUIZ.correct,
+    total: QUIZ.total,
+    streak: QUIZ.streak,
+    answered: QUIZ.answered,
+    html: area ? area.innerHTML : '',
+  };
+  saveAppState();
+}
+
+function restoreQuizState() {
+  const saved = appState.quiz;
+  if (!saved) return false;
+
+  QUIZ.mode = saved.mode || 'vocab';
+  QUIZ.correct = saved.correct || 0;
+  QUIZ.total = saved.total || 0;
+  QUIZ.streak = saved.streak || 0;
+  QUIZ.answered = !!saved.answered;
+  QUIZ.updateStats();
+
+  document.querySelectorAll('.game-mode-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.mode === QUIZ.mode);
+  });
+
+  const area = document.getElementById('quiz-area');
+  if (!area || !saved.html) return false;
+  area.innerHTML = saved.html;
+  const input = area.querySelector('.quiz-input:not(:disabled)');
+  if (input) input.focus();
+  return true;
+}
+
+function handleQuizInputAnswer(input) {
+  if (QUIZ.answered || input.disabled) return;
+  const answer = input.dataset.quizAnswer || '';
+  const val = input.value.trim().toLowerCase();
+  const correct = val === answer.toLowerCase();
+  QUIZ.answer(correct, answer);
+  input.classList.add(correct ? 'correct' : 'wrong');
+  input.disabled = true;
+
+  const fb = document.getElementById('quiz-fb');
+  const reveal = input.dataset.quizReveal || `<b>${answer}</b>`;
+  fb.innerHTML = correct
+    ? '<span class="correct-text">Corretto!</span>'
+    : `<span class="wrong-text">Sbagliato</span><div class="answer-reveal">${reveal}</div>`;
+  fb.innerHTML += `<br><button class="quiz-next" onclick="QUIZ.generate()">Prossimo \u2192</button>`;
+  saveQuizState();
+}
+
 function quizAnswer(btn, chosen, answer) {
   if (QUIZ.answered) return;
   const correct = chosen === answer;
@@ -1751,6 +2584,7 @@ function quizAnswer(btn, chosen, answer) {
     ? '<span class="correct-text">Corretto!</span>'
     : '<span class="wrong-text">Sbagliato</span>';
   fb.innerHTML += `<br><button class="quiz-next" onclick="QUIZ.generate()">Prossimo \u2192</button>`;
+  saveQuizState();
 }
 
 function setMode(mode) {
@@ -1759,12 +2593,31 @@ function setMode(mode) {
   QUIZ.generate();
 }
 
+document.getElementById('quiz-area').addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter') return;
+  if (!e.target.matches('.quiz-input[data-quiz-answer]')) return;
+  handleQuizInputAnswer(e.target);
+});
+
+document.getElementById('quiz-area').addEventListener('input', (e) => {
+  if (!e.target.matches('.quiz-input[data-quiz-answer]')) return;
+  e.target.setAttribute('value', e.target.value);
+  saveQuizState();
+});
+
 // Auto-start quiz when panel opens
 const origShowPanel = showPanel;
-showPanel = function(id) {
-  origShowPanel(id);
-  if (id === 'game') QUIZ.generate();
+showPanel = function(id, options = {}) {
+  origShowPanel(id, options);
+  if (id !== 'game') return;
+  const area = document.getElementById('quiz-area');
+  if (options.restoreQuiz && restoreQuizState()) return;
+  if (!area.innerHTML.trim()) QUIZ.generate();
+  else saveQuizState();
 };
+
+restoreStudyTabs();
+showPanel(getInitialPanelId(), { restoreScroll: true, restoreQuiz: true });
 </script>
 
 </body>
