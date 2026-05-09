@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italiano - Adaptive Practice</title>
+<style>
+  :root {
+    --bg: #090a0c;
+    --surface: #111317;
+    --surface-soft: #171a1f;
+    --surface-hover: #1d2228;
+    --sidebar: #0d0f12;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.13);
+    --text: #e4dfd7;
+    --text-muted: #a49b90;
+    --text-dim: #746d64;
+    --accent: #d46f55;
+    --accent-soft: rgba(212, 111, 85, 0.14);
+    --sage: #86aa92;
+    --steel: #7693b2;
+    --amber: #d5a84a;
+    --violet: #a78bc3;
+    --danger: #c26d68;
+    --unseen: #545b64;
+    --radius: 8px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    overflow: hidden;
+    background:
+      linear-gradient(140deg, rgba(212, 111, 85, 0.08), transparent 34%),
+      radial-gradient(circle at 82% 10%, rgba(134, 170, 146, 0.09), transparent 28%),
+      var(--bg);
+    color: var(--text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+
+  button {
+    font: inherit;
+  }
+
+  .app-shell {
+    display: grid;
+    grid-template-columns: 288px minmax(0, 1fr);
+    height: 100vh;
+  }
+
+  .sidebar {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    border-right: 1px solid var(--border);
+    background: rgba(13, 15, 18, 0.96);
+  }
+
+  .brand {
+    padding: 24px 20px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .brand-title {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.8rem;
+    line-height: 1.05;
+    letter-spacing: 0;
+  }
+
+  .brand-title span {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .flag-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 96px;
+    height: 3px;
+    margin-top: 12px;
+    overflow: hidden;
+    border-radius: 999px;
+  }
+
+  .flag-strip i:nth-child(1) { background: #009246; }
+  .flag-strip i:nth-child(2) { background: rgba(255, 255, 255, 0.72); }
+  .flag-strip i:nth-child(3) { background: #ce2b37; }
+
+  .progress-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .summary-tile {
+    min-width: 0;
+    padding: 9px 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .summary-value {
+    display: block;
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .summary-label {
+    display: block;
+    margin-top: 3px;
+    color: var(--text-dim);
+    font-size: 0.68rem;
+    line-height: 1.15;
+  }
+
+  .package-nav {
+    min-height: 0;
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 10px 18px;
+  }
+
+  .package-nav::-webkit-scrollbar,
+  .main::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .package-nav::-webkit-scrollbar-thumb,
+  .main::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: var(--border-strong);
+  }
+
+  .nav-group {
+    margin-bottom: 16px;
+  }
+
+  .nav-group-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 10px 7px;
+    color: var(--text-dim);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .group-dot {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--group-color);
+  }
+
+  .package-button {
+    display: grid;
+    grid-template-columns: 12px minmax(0, 1fr) auto;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    margin: 2px 0;
+    padding: 9px 10px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .package-button:hover {
+    background: var(--surface-soft);
+    color: var(--text);
+  }
+
+  .package-button.active {
+    border-color: rgba(212, 111, 85, 0.2);
+    background: var(--accent-soft);
+    color: var(--text);
+  }
+
+  .state-marker {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--unseen);
+    box-shadow: 0 0 0 3px rgba(84, 91, 100, 0.14);
+  }
+
+  .state-marker.starting {
+    background: var(--danger);
+    box-shadow: 0 0 0 3px rgba(194, 109, 104, 0.16);
+  }
+
+  .state-marker.learning {
+    background: var(--amber);
+    box-shadow: 0 0 0 3px rgba(213, 168, 74, 0.16);
+  }
+
+  .state-marker.solid {
+    background: var(--steel);
+    box-shadow: 0 0 0 3px rgba(118, 147, 178, 0.16);
+  }
+
+  .state-marker.mastered {
+    background: var(--sage);
+    box-shadow: 0 0 0 3px rgba(134, 170, 146, 0.18);
+  }
+
+  .package-title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.92rem;
+  }
+
+  .package-percent {
+    color: var(--text-dim);
+    font-size: 0.76rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .main {
+    min-width: 0;
+    overflow-y: auto;
+  }
+
+  .main-inner {
+    width: min(1100px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 34px 0 80px;
+  }
+
+  .workspace-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .eyebrow {
+    margin: 0 0 7px;
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    line-height: 1.02;
+    letter-spacing: 0;
+  }
+
+  .header-copy {
+    max-width: 31rem;
+    margin: 12px 0 0;
+    color: var(--text-muted);
+    font-size: 1rem;
+  }
+
+  .status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: 0.83rem;
+    white-space: nowrap;
+  }
+
+  .status-chip .state-marker {
+    width: 8px;
+    height: 8px;
+  }
+
+  .panel-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.9fr);
+    gap: 16px;
+    align-items: start;
+  }
+
+  .panel,
+  .concept-list {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: rgba(17, 19, 23, 0.88);
+  }
+
+  .panel {
+    min-height: 360px;
+    padding: 22px;
+  }
+
+  .panel-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .panel-title-row h3,
+  .concept-list h3 {
+    margin: 0;
+    font-size: 1rem;
+    letter-spacing: 0;
+  }
+
+  .practice-stage {
+    min-height: 270px;
+    padding: 26px 12px 18px;
+  }
+
+  .stage-stack {
+    width: min(560px, 100%);
+  }
+
+  .practice-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .mode-button,
+  .action-button,
+  .choice-button {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface-soft);
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+
+  .mode-button,
+  .action-button {
+    padding: 8px 12px;
+    font-size: 0.82rem;
+  }
+
+  .mode-button.active {
+    border-color: rgba(212, 111, 85, 0.28);
+    background: var(--accent-soft);
+    color: var(--text);
+  }
+
+  .practice-card {
+    margin-top: 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: rgba(23, 26, 31, 0.9);
+    padding: 18px;
+  }
+
+  .practice-label {
+    margin: 0 0 10px;
+    color: var(--text-dim);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .prompt-word {
+    margin: 0 0 16px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.05;
+  }
+
+  .image-choice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .choice-button {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    padding: 14px 12px;
+    border-radius: var(--radius);
+    text-align: center;
+  }
+
+  .choice-button:hover {
+    background: var(--surface-hover);
+    color: var(--text);
+  }
+
+  .choice-button.correct {
+    border-color: rgba(134, 170, 146, 0.28);
+    background: rgba(134, 170, 146, 0.14);
+    color: var(--text);
+  }
+
+  .choice-button.wrong {
+    border-color: rgba(194, 109, 104, 0.28);
+    background: rgba(194, 109, 104, 0.14);
+    color: var(--text);
+  }
+
+  .choice-emoji,
+  .hero-emoji {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    line-height: 1;
+  }
+
+  .choice-name {
+    font-size: 0.8rem;
+  }
+
+  .hero-emoji {
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .answer-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .answer-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: #0f1216;
+    color: var(--text);
+    font: inherit;
+  }
+
+  .answer-input::placeholder {
+    color: var(--text-dim);
+  }
+
+  .feedback-text,
+  .asset-caption,
+  .empty-state {
+    margin: 12px 0 0;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+  }
+
+  .asset-caption {
+    color: var(--text-dim);
+    font-size: 0.76rem;
+  }
+
+  .module-kicker {
+    margin: 0 0 10px;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .stage-heading {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.9rem, 5vw, 3rem);
+    line-height: 1.05;
+  }
+
+  .stage-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .meta-pill {
+    padding: 7px 9px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface-soft);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+  }
+
+  .concept-list {
+    overflow: hidden;
+  }
+
+  .concept-list h3 {
+    padding: 17px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .concept-items {
+    display: grid;
+  }
+
+  .concept-item {
+    display: grid;
+    grid-template-columns: 10px minmax(0, 1fr) auto;
+    gap: 10px;
+    align-items: center;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .concept-item:last-child {
+    border-bottom: 0;
+  }
+
+  .concept-name {
+    overflow: hidden;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .concept-score {
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mobile-toggle {
+    display: none;
+  }
+
+  @media (max-width: 820px) {
+    body {
+      overflow: auto;
+    }
+
+    .app-shell {
+      display: block;
+      height: auto;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      max-height: 58vh;
+      border-right: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      padding: 18px 16px 14px;
+    }
+
+    .progress-summary {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      padding: 10px;
+    }
+
+    .package-nav {
+      max-height: 34vh;
+    }
+
+    .main {
+      overflow: visible;
+    }
+
+    .main-inner {
+      width: min(100% - 28px, 720px);
+      padding-top: 24px;
+    }
+
+    .workspace-header,
+    .panel-grid {
+      display: block;
+    }
+
+    .status-chip {
+      margin-top: 16px;
+    }
+
+    .concept-list {
+      margin-top: 14px;
+    }
+
+    .image-choice-grid,
+    .answer-row {
+      grid-template-columns: 1fr;
+      display: grid;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Practice packages">
+      <header class="brand">
+        <h1 class="brand-title">Italiano <span>Mastery</span></h1>
+        <div class="flag-strip" aria-hidden="true"><i></i><i></i><i></i></div>
+      </header>
+
+      <section class="progress-summary" aria-label="Progress summary">
+        <div class="summary-tile">
+          <span class="summary-value" id="summary-packages">0</span>
+          <span class="summary-label">Packages</span>
+        </div>
+        <div class="summary-tile">
+          <span class="summary-value" id="summary-started">0</span>
+          <span class="summary-label">Started</span>
+        </div>
+        <div class="summary-tile">
+          <span class="summary-value" id="summary-average">0%</span>
+          <span class="summary-label">Average</span>
+        </div>
+      </section>
+
+      <nav class="package-nav" id="package-nav" aria-label="Module packages"></nav>
+    </aside>
+
+    <main class="main">
+      <div class="main-inner">
+        <header class="workspace-header">
+          <div>
+            <p class="eyebrow" id="active-group">Adaptive practice</p>
+            <h2 id="active-title">Practice shell</h2>
+            <p class="header-copy" id="active-description"></p>
+          </div>
+          <div class="status-chip">
+            <span class="state-marker" id="active-marker"></span>
+            <span id="active-status">Unseen</span>
+          </div>
+        </header>
+
+        <section class="panel-grid" aria-live="polite">
+          <article class="panel">
+            <div class="panel-title-row">
+              <h3>Practice surface</h3>
+              <span class="package-percent" id="active-percent">0%</span>
+            </div>
+            <div class="practice-stage">
+              <div class="stage-stack">
+                <p class="module-kicker" id="stage-kicker">Selected package</p>
+                <p class="stage-heading" id="stage-heading">Choose a package</p>
+                <div class="stage-meta" id="stage-meta"></div>
+                <div class="practice-controls" id="practice-controls"></div>
+                <div class="practice-card" id="practice-card"></div>
+              </div>
+            </div>
+          </article>
+
+          <aside class="concept-list" aria-label="Package concepts">
+            <h3>Concepts</h3>
+            <div class="concept-items" id="concept-items"></div>
+          </aside>
+        </section>
+      </div>
+    </main>
+  </div>
+
+<script>
+const STORAGE_KEY = 'italian-mastery-state-v1';
+const VOCABULARY_IMAGE_MANIFEST = [
+  { conceptId: 'rosso', label: 'rosso', emoji: '🍎', url: 'emoji://rosso', source: 'emoji-placeholder', license: 'placeholder', attributionUrl: 'about:blank' },
+  { conceptId: 'verde', label: 'verde', emoji: '🥝', url: 'emoji://verde', source: 'emoji-placeholder', license: 'placeholder', attributionUrl: 'about:blank' },
+  { conceptId: 'blu', label: 'blu', emoji: '🫐', url: 'emoji://blu', source: 'emoji-placeholder', license: 'placeholder', attributionUrl: 'about:blank' },
+  { conceptId: 'giallo', label: 'giallo', emoji: '🍋', url: 'emoji://giallo', source: 'emoji-placeholder', license: 'placeholder', attributionUrl: 'about:blank' },
+  { conceptId: 'nero', label: 'nero', emoji: '🎩', url: 'emoji://nero', source: 'emoji-placeholder', license: 'placeholder', attributionUrl: 'about:blank' },
+  { conceptId: 'bianco', label: 'bianco', emoji: '🥛', url: 'emoji://bianco', source: 'emoji-placeholder', license: 'placeholder', attributionUrl: 'about:blank' },
+  { conceptId: 'viola', label: 'viola', emoji: '🍇', url: 'emoji://viola', source: 'emoji-placeholder', license: 'placeholder', attributionUrl: 'about:blank' },
+  { conceptId: 'arancione', label: 'arancione', emoji: '🍊', url: 'emoji://arancione', source: 'emoji-placeholder', license: 'placeholder', attributionUrl: 'about:blank' },
+  { conceptId: 'number-uno', label: 'uno', emoji: '1️⃣', url: 'emoji://number-uno', source: 'emoji-placeholder', license: 'placeholder', attributionUrl: 'about:blank' },
+  { conceptId: 'due', label: 'due', emoji: '2️⃣', url: 'emoji://due', source: 'emoji-placeholder', license: 'placeholder', attributionUrl: 'about:blank' },
+  { conceptId: 'tre', label: 'tre', emoji: '3️⃣', url: 'emoji://tre', source: 'emoji-placeholder', license: 'placeholder', attributionUrl: 'about:blank' },
+  { conceptId: 'quattro', label: 'quattro', emoji: '4️⃣', url: 'emoji://quattro', source: 'emoji-placeholder', license: 'placeholder', attributionUrl: 'about:blank' },
+  { conceptId: 'cinque', label: 'cinque', emoji: '5️⃣', url: 'emoji://cinque', source: 'emoji-placeholder', license: 'placeholder', attributionUrl: 'about:blank' },
+  { conceptId: 'dieci', label: 'dieci', emoji: '🔟', url: 'emoji://dieci', source: 'emoji-placeholder', license: 'placeholder', attributionUrl: 'about:blank' }
+];
+
+const CURRICULUM = [
+  {
+    id: 'practice',
+    title: 'Pratica',
+    color: 'var(--accent)',
+    packages: [
+      {
+        id: 'adaptive-queue',
+        title: 'Adaptive Queue',
+        description: 'Mixed review across active packages.',
+        concepts: ['queue-vocabulary', 'queue-modules', 'queue-phrases']
+      }
+    ]
+  },
+  {
+    id: 'level-1',
+    title: 'Livello 1 - Basi',
+    color: 'var(--sage)',
+    packages: [
+      {
+        id: 'pronunciation',
+        title: 'Fonetica',
+        description: 'Sounds, stress, and spelling patterns.',
+        concepts: ['vowels', 'consonants', 'stress', 'spelling']
+      },
+      {
+        id: 'pronouns',
+        title: 'Pronomi',
+        description: 'Subject pronouns and person markers.',
+        concepts: ['io', 'tu', 'lui-lei', 'noi', 'voi', 'loro']
+      },
+      {
+        id: 'articles',
+        title: 'Articoli',
+        description: 'Definite and indefinite article choices.',
+        concepts: ['il', 'lo', 'la', 'l-apostrophe', 'i', 'gli', 'le', 'un', 'article-uno', 'una']
+      },
+      {
+        id: 'possessives',
+        title: 'Possessivi + possesso',
+        description: 'Possessive forms and ownership patterns.',
+        concepts: ['mio', 'tuo', 'suo', 'nostro', 'vostro', 'loro-possessive']
+      },
+      {
+        id: 'colors',
+        title: 'Colori',
+        description: 'Common color vocabulary.',
+        concepts: ['rosso', 'verde', 'blu', 'giallo', 'nero', 'bianco', 'viola', 'arancione']
+      },
+      {
+        id: 'numbers',
+        title: 'Numeri',
+        description: 'Cardinal number recall.',
+        concepts: ['number-uno', 'due', 'tre', 'quattro', 'cinque', 'dieci', 'venti', 'cento']
+      },
+      {
+        id: 'phrases',
+        title: 'Frasi utili',
+        description: 'Reusable everyday phrase blocks.',
+        concepts: ['ciao', 'grazie', 'per-favore', 'come-stai', 'mi-chiamo', 'sono-di']
+      }
+    ]
+  },
+  {
+    id: 'level-2',
+    title: 'Livello 2 - Fondamenti',
+    color: 'var(--steel)',
+    packages: [
+      {
+        id: 'prepositions',
+        title: 'Preposizioni',
+        description: 'Simple prepositions and common uses.',
+        concepts: ['di', 'a', 'da', 'in', 'con', 'su', 'per', 'tra-fra']
+      },
+      {
+        id: 'present-prog',
+        title: 'Progressivo: stare + gerundio',
+        description: 'Progressive action patterns.',
+        concepts: ['stare-presente', 'gerundio-are', 'gerundio-ere', 'gerundio-ire']
+      },
+      {
+        id: 'essere',
+        title: 'Essere',
+        description: 'Present forms of essere.',
+        concepts: ['sono', 'sei', 'e', 'siamo', 'siete', 'sono-loro']
+      },
+      {
+        id: 'avere',
+        title: 'Avere',
+        description: 'Present forms of avere.',
+        concepts: ['ho', 'hai', 'ha', 'abbiamo', 'avete', 'hanno']
+      }
+    ]
+  },
+  {
+    id: 'level-3',
+    title: 'Livello 3 - Coniugazioni',
+    color: 'var(--amber)',
+    packages: [
+      {
+        id: 'amare',
+        title: '1a coniugazione - ARE',
+        description: 'Regular -are present tense patterns.',
+        concepts: ['amare-o', 'amare-i', 'amare-a', 'amare-iamo', 'amare-ate', 'amare-ano']
+      },
+      {
+        id: 'temere',
+        title: '2a coniugazione - ERE',
+        description: 'Regular -ere present tense patterns.',
+        concepts: ['temere-o', 'temere-i', 'temere-e', 'temere-iamo', 'temere-ete', 'temere-ono']
+      },
+      {
+        id: 'sentire',
+        title: '3a coniugazione - IRE',
+        description: 'Regular -ire present tense patterns.',
+        concepts: ['sentire-o', 'sentire-i', 'sentire-e', 'sentire-iamo', 'sentire-ite', 'sentire-ono']
+      }
+    ]
+  },
+  {
+    id: 'level-4',
+    title: 'Livello 4 - Avanzato',
+    color: 'var(--violet)',
+    packages: [
+      {
+        id: 'irregular',
+        title: 'Verbi irregolari',
+        description: 'High-frequency irregular verb forms.',
+        concepts: ['andare', 'fare', 'volere', 'potere', 'dovere', 'venire']
+      },
+      {
+        id: 'reflexive',
+        title: 'Verbi riflessivi',
+        description: 'Reflexive pronouns and verb forms.',
+        concepts: ['mi', 'ti', 'si', 'ci', 'vi', 'specchiarsi']
+      }
+    ]
+  }
+];
+
+function labelFromConceptId(conceptId) {
+  const labels = {
+    'article-uno': 'Uno',
+    'number-uno': 'Uno',
+    'l-apostrophe': "L'"
+  };
+  if (labels[conceptId]) return labels[conceptId];
+
+  return conceptId
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, letter => letter.toUpperCase());
+}
+
+function createCurriculumExport(groups) {
+  const conceptMap = new Map();
+  const modules = groups.flatMap(group => group.packages.map(pkg => {
+    pkg.concepts.forEach(conceptId => {
+      const existing = conceptMap.get(conceptId) || {
+        id: conceptId,
+        type: 'shell',
+        label: labelFromConceptId(conceptId),
+        modules: []
+      };
+      existing.modules.push(pkg.id);
+      conceptMap.set(conceptId, existing);
+    });
+
+    return {
+      id: pkg.id,
+      title: pkg.title,
+      groupId: group.id,
+      conceptIds: pkg.concepts.slice()
+    };
+  }));
+
+  return {
+    groups,
+    modules,
+    concepts: Array.from(conceptMap.values()),
+    phraseTemplates: [],
+    imageAssets: VOCABULARY_IMAGE_MANIFEST.map(asset => ({ ...asset }))
+  };
+}
+
+if (typeof window !== 'undefined') {
+  window.CURRICULUM = createCurriculumExport(CURRICULUM);
+}
+
+function getStorage() {
+  if (typeof window !== 'undefined' && window.localStorage) return window.localStorage;
+  if (typeof localStorage !== 'undefined') return localStorage;
+  return {
+    getItem() { return null; },
+    setItem() {},
+    removeItem() {}
+  };
+}
+
+function createEmptyConceptProgress() {
+  return {
+    attempts: 0,
+    correct: 0,
+    wrong: 0,
+    streak: 0,
+    mastery: 0,
+    confusions: {},
+    seenInContext: 0,
+    lastPracticed: null
+  };
+}
+
+function normalizeConceptProgress(progress) {
+  const base = createEmptyConceptProgress();
+  if (!progress || typeof progress !== 'object') return base;
+
+  const attempts = Number.isFinite(progress.attempts) ? progress.attempts : base.attempts;
+  const correct = Number.isFinite(progress.correct) ? progress.correct : base.correct;
+  const wrong = Number.isFinite(progress.wrong) ? progress.wrong : base.wrong;
+
+  return {
+    attempts,
+    correct,
+    wrong,
+    streak: Number.isFinite(progress.streak) ? progress.streak : base.streak,
+    mastery: Number.isFinite(progress.mastery) ? progress.mastery : (attempts > 0 ? correct / attempts : 0),
+    confusions: progress.confusions && typeof progress.confusions === 'object' ? { ...progress.confusions } : {},
+    seenInContext: Number.isFinite(progress.seenInContext) ? progress.seenInContext : base.seenInContext,
+    lastPracticed: typeof progress.lastPracticed === 'string' ? progress.lastPracticed : base.lastPracticed
+  };
+}
+
+function createEmptyPhraseProgress() {
+  return {
+    attempts: 0,
+    fullCorrect: 0,
+    mastery: 0,
+    lastPracticed: null
+  };
+}
+
+function normalizePhraseProgress(progress) {
+  const base = createEmptyPhraseProgress();
+  if (!progress || typeof progress !== 'object') return base;
+
+  const attempts = Number.isFinite(progress.attempts) ? progress.attempts : base.attempts;
+  const fullCorrect = Number.isFinite(progress.fullCorrect) ? progress.fullCorrect : base.fullCorrect;
+
+  return {
+    attempts,
+    fullCorrect,
+    mastery: Number.isFinite(progress.mastery) ? progress.mastery : (attempts > 0 ? fullCorrect / attempts : 0),
+    lastPracticed: typeof progress.lastPracticed === 'string' ? progress.lastPracticed : base.lastPracticed
+  };
+}
+
+function cloneProgressMap(progressMap) {
+  const clone = {};
+  Object.entries(progressMap || {}).forEach(([conceptId, progress]) => {
+    clone[conceptId] = normalizeConceptProgress(progress);
+  });
+  return clone;
+}
+
+function clonePhraseProgressMap(phraseProgressMap) {
+  const clone = {};
+  Object.entries(phraseProgressMap || {}).forEach(([templateId, progress]) => {
+    clone[templateId] = normalizePhraseProgress(progress);
+  });
+  return clone;
+}
+
+function shuffleList(items) {
+  const clone = items.slice();
+  for (let index = clone.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [clone[index], clone[swapIndex]] = [clone[swapIndex], clone[index]];
+  }
+  return clone;
+}
+
+function getVocabularyAssetsForPackage(pkg) {
+  const conceptIds = new Set(pkg.concepts);
+  return VOCABULARY_IMAGE_MANIFEST.filter(asset => conceptIds.has(asset.conceptId));
+}
+
+function pickExerciseAsset(pkg) {
+  const assets = getVocabularyAssetsForPackage(pkg);
+  if (!assets.length) return null;
+
+  const currentIndex = state.exerciseIndexByPackage[pkg.id] || 0;
+  return assets[currentIndex % assets.length];
+}
+
+function createWordToImageExercise(pkg, targetAsset) {
+  const packageAssets = getVocabularyAssetsForPackage(pkg);
+  const distractors = shuffleList(packageAssets.filter(asset => asset.conceptId !== targetAsset.conceptId)).slice(0, 3);
+  return {
+    mode: 'word-to-image',
+    targetAsset,
+    choices: shuffleList([targetAsset, ...distractors])
+  };
+}
+
+function createImageToWordExercise(targetAsset) {
+  return {
+    mode: 'image-to-word',
+    targetAsset
+  };
+}
+
+function buildVocabularyExercise(pkg) {
+  const targetAsset = pickExerciseAsset(pkg);
+  if (!targetAsset) return null;
+  return state.practiceMode === 'image-to-word'
+    ? createImageToWordExercise(targetAsset)
+    : createWordToImageExercise(pkg, targetAsset);
+}
+
+function updateMastery(progress) {
+  progress.mastery = progress.attempts > 0 ? progress.correct / progress.attempts : 0;
+  return progress;
+}
+
+function recordContextExposure(progressMap, conceptIds) {
+  (conceptIds || []).forEach(conceptId => {
+    const progress = normalizeConceptProgress(progressMap[conceptId]);
+    progress.seenInContext += 1;
+    progressMap[conceptId] = progress;
+  });
+}
+
+function scoreConceptAttempt(progressMap, result, timestamp) {
+  const progress = normalizeConceptProgress(progressMap[result.conceptId]);
+  const normalizedExpected = String(result.expected || '').trim().toLowerCase();
+  const normalizedAnswer = String(result.answer || '').trim().toLowerCase();
+  const isCorrect = normalizedExpected === normalizedAnswer;
+
+  progress.attempts += 1;
+  progress.lastPracticed = timestamp;
+
+  if (isCorrect) {
+    progress.correct += 1;
+    progress.streak += 1;
+  } else {
+    progress.wrong += 1;
+    progress.streak = 0;
+    if (normalizedAnswer) {
+      progress.confusions[normalizedAnswer] = (progress.confusions[normalizedAnswer] || 0) + 1;
+    }
+  }
+
+  progressMap[result.conceptId] = updateMastery(progress);
+  return isCorrect;
+}
+
+function scoreExercise(options) {
+  const timestamp = options.timestamp || new Date().toISOString();
+  const progress = cloneProgressMap(options.progress);
+  const phraseProgress = clonePhraseProgressMap(options.phraseProgress);
+  const answers = options.answers || [];
+
+  recordContextExposure(progress, options.contextConceptIds || []);
+
+  let allCorrect = answers.length > 0;
+  answers.forEach(answer => {
+    const isCorrect = scoreConceptAttempt(progress, answer, timestamp);
+    if (!isCorrect) allCorrect = false;
+  });
+
+  if (options.templateId) {
+    const phrase = normalizePhraseProgress(phraseProgress[options.templateId]);
+    phrase.attempts += 1;
+    if (allCorrect) phrase.fullCorrect += 1;
+    phrase.mastery = phrase.attempts > 0 ? phrase.fullCorrect / phrase.attempts : 0;
+    phrase.lastPracticed = timestamp;
+    phraseProgress[options.templateId] = phrase;
+  }
+
+  return {
+    progress,
+    phraseProgress,
+    allCorrect
+  };
+}
+
+function loadState() {
+  try {
+    const parsed = JSON.parse(getStorage().getItem(STORAGE_KEY) || '{}');
+    return {
+      activePackageId: parsed.activePackageId || null,
+      progress: parsed.progress && typeof parsed.progress === 'object' ? parsed.progress : {},
+      phraseProgress: parsed.phraseProgress && typeof parsed.phraseProgress === 'object' ? parsed.phraseProgress : {},
+      practiceMode: parsed.practiceMode === 'image-to-word' ? 'image-to-word' : 'word-to-image',
+      exerciseIndexByPackage: parsed.exerciseIndexByPackage && typeof parsed.exerciseIndexByPackage === 'object' ? parsed.exerciseIndexByPackage : {}
+    };
+  } catch (_error) {
+    return { activePackageId: null, progress: {}, phraseProgress: {}, practiceMode: 'word-to-image', exerciseIndexByPackage: {} };
+  }
+}
+
+function saveState() {
+  try {
+    getStorage().setItem(STORAGE_KEY, JSON.stringify(state));
+    return true;
+  } catch (_error) {
+    return false;
+  }
+}
+
+function getPackages() {
+  return CURRICULUM.flatMap(group => group.packages.map(pkg => ({ ...pkg, group })));
+}
+
+function getConceptProgress(conceptId) {
+  return normalizeConceptProgress(state.progress[conceptId]);
+}
+
+function getPackageMastery(pkg) {
+  if (!pkg.concepts.length) return { value: 0, state: 'unseen', started: false };
+
+  const conceptProgress = pkg.concepts.map(getConceptProgress);
+  const started = conceptProgress.some(item => item.attempts > 0);
+  const value = conceptProgress.reduce((sum, item) => sum + item.mastery, 0) / conceptProgress.length;
+
+  if (!started) return { value: 0, state: 'unseen', started };
+  if (value >= 0.86) return { value, state: 'mastered', started };
+  if (value >= 0.68) return { value, state: 'solid', started };
+  if (value >= 0.36) return { value, state: 'learning', started };
+  return { value, state: 'starting', started };
+}
+
+function formatPercent(value) {
+  return `${Math.round(value * 100)}%`;
+}
+
+function formatState(stateName) {
+  const labels = {
+    unseen: 'Unseen',
+    starting: 'Starting',
+    learning: 'Learning',
+    solid: 'Solid',
+    mastered: 'Mastered'
+  };
+  return labels[stateName] || labels.unseen;
+}
+
+function renderNav() {
+  const nav = document.getElementById('package-nav');
+  nav.innerHTML = CURRICULUM.map(group => `
+    <section class="nav-group">
+      <div class="nav-group-heading" style="--group-color: ${group.color}">
+        <span class="group-dot"></span>
+        <span>${group.title}</span>
+      </div>
+      ${group.packages.map(pkg => {
+        const mastery = getPackageMastery(pkg);
+        const active = pkg.id === state.activePackageId ? ' active' : '';
+        return `
+          <button class="package-button${active}" type="button" data-package-id="${pkg.id}">
+            <span class="state-marker ${mastery.state}" title="${formatState(mastery.state)}"></span>
+            <span class="package-title">${pkg.title}</span>
+            <span class="package-percent">${formatPercent(mastery.value)}</span>
+          </button>
+        `;
+      }).join('')}
+    </section>
+  `).join('');
+
+  nav.querySelectorAll('[data-package-id]').forEach(button => {
+    button.addEventListener('click', () => selectPackage(button.dataset.packageId));
+  });
+}
+
+function renderSummary() {
+  const packages = getPackages();
+  const masteries = packages.map(({ concepts }) => getPackageMastery({ concepts }));
+  const started = masteries.filter(item => item.started).length;
+  const average = masteries.reduce((sum, item) => sum + item.value, 0) / masteries.length;
+
+  document.getElementById('summary-packages').textContent = packages.length;
+  document.getElementById('summary-started').textContent = started;
+  document.getElementById('summary-average').textContent = formatPercent(average || 0);
+}
+
+function renderPracticeControls(selected) {
+  const controls = document.getElementById('practice-controls');
+  const assets = getVocabularyAssetsForPackage(selected);
+  if (!assets.length) {
+    controls.innerHTML = '';
+    return;
+  }
+
+  controls.innerHTML = `
+    <button class="mode-button${state.practiceMode === 'word-to-image' ? ' active' : ''}" type="button" data-practice-mode="word-to-image">Word -> Image</button>
+    <button class="mode-button${state.practiceMode === 'image-to-word' ? ' active' : ''}" type="button" data-practice-mode="image-to-word">Image -> Word</button>
+    <button class="action-button" type="button" data-practice-action="next">Next Card</button>
+  `;
+
+  controls.querySelectorAll('[data-practice-mode]').forEach(button => {
+    button.addEventListener('click', () => {
+      state.practiceMode = button.dataset.practiceMode;
+      saveState();
+      render();
+    });
+  });
+
+  controls.querySelector('[data-practice-action="next"]').addEventListener('click', () => {
+    state.exerciseIndexByPackage[selected.id] = (state.exerciseIndexByPackage[selected.id] || 0) + 1;
+    saveState();
+    render();
+  });
+}
+
+function commitExerciseResult(selected, targetAsset, answer) {
+  const outcome = scoreExercise({
+    progress: state.progress,
+    phraseProgress: state.phraseProgress,
+    answers: [
+      { conceptId: targetAsset.conceptId, expected: targetAsset.label, answer }
+    ]
+  });
+  state.progress = outcome.progress;
+  state.phraseProgress = outcome.phraseProgress;
+  saveState();
+  return answer.trim().toLowerCase() === targetAsset.label.trim().toLowerCase();
+}
+
+function renderWordToImageExercise(selected, exercise) {
+  const card = document.getElementById('practice-card');
+  let locked = false;
+  let feedback = '';
+
+  card.innerHTML = `
+    <p class="practice-label">Word to image</p>
+    <p class="prompt-word">${exercise.targetAsset.label}</p>
+    <div class="image-choice-grid">
+      ${exercise.choices.map(choice => `
+        <button class="choice-button" type="button" data-choice-id="${choice.conceptId}">
+          <span class="choice-emoji" aria-hidden="true">${choice.emoji}</span>
+          <span class="choice-name">${labelFromConceptId(choice.conceptId)}</span>
+        </button>
+      `).join('')}
+    </div>
+    <p class="asset-caption">Manifest source: ${exercise.targetAsset.source} | license: ${exercise.targetAsset.license}</p>
+    <p class="feedback-text" id="practice-feedback"></p>
+  `;
+
+  card.querySelectorAll('[data-choice-id]').forEach(button => {
+    button.addEventListener('click', () => {
+      if (locked) return;
+      locked = true;
+      const chosenId = button.dataset.choiceId;
+      const answer = exercise.choices.find(choice => choice.conceptId === chosenId)?.label || '';
+      const correct = commitExerciseResult(selected, exercise.targetAsset, answer);
+      feedback = correct ? 'Correct recall recorded.' : `Expected ${exercise.targetAsset.label}.`;
+
+      card.querySelectorAll('[data-choice-id]').forEach(choiceButton => {
+        const isTarget = choiceButton.dataset.choiceId === exercise.targetAsset.conceptId;
+        choiceButton.classList.add(isTarget ? 'correct' : (choiceButton === button ? 'wrong' : ''));
+      });
+      card.querySelector('#practice-feedback').textContent = feedback;
+      renderSummary();
+      renderNav();
+      renderActivePackage();
+    });
+  });
+}
+
+function renderImageToWordExercise(selected, exercise) {
+  const card = document.getElementById('practice-card');
+  let locked = false;
+
+  card.innerHTML = `
+    <p class="practice-label">Image to word</p>
+    <span class="hero-emoji" aria-hidden="true">${exercise.targetAsset.emoji}</span>
+    <div class="answer-row">
+      <input class="answer-input" id="answer-input" type="text" placeholder="Type the Italian word" autocomplete="off" spellcheck="false">
+      <button class="action-button" id="answer-submit" type="button">Check</button>
+    </div>
+    <p class="asset-caption">Manifest source: ${exercise.targetAsset.source} | license: ${exercise.targetAsset.license}</p>
+    <p class="feedback-text" id="practice-feedback"></p>
+  `;
+
+  const input = card.querySelector('#answer-input');
+  const submit = card.querySelector('#answer-submit');
+  const runCheck = () => {
+    if (locked) return;
+    locked = true;
+    const answer = input.value || '';
+    const correct = commitExerciseResult(selected, exercise.targetAsset, answer);
+    card.querySelector('#practice-feedback').textContent = correct
+      ? 'Correct recall recorded.'
+      : `Expected ${exercise.targetAsset.label}.`;
+    input.disabled = true;
+    submit.disabled = true;
+    renderSummary();
+    renderNav();
+    renderActivePackage();
+  };
+
+  submit.addEventListener('click', runCheck);
+  input.addEventListener('keydown', event => {
+    if (event.key === 'Enter') runCheck();
+  });
+}
+
+function renderPracticeCard(selected) {
+  const card = document.getElementById('practice-card');
+  const exercise = buildVocabularyExercise(selected);
+  if (!exercise) {
+    card.innerHTML = '<p class="empty-state">No image manifest items are available for this package yet.</p>';
+    return;
+  }
+
+  if (exercise.mode === 'image-to-word') {
+    renderImageToWordExercise(selected, exercise);
+    return;
+  }
+
+  renderWordToImageExercise(selected, exercise);
+}
+
+function renderActivePackage() {
+  const packages = getPackages();
+  const selected = packages.find(item => item.id === state.activePackageId) || packages[0];
+  state.activePackageId = selected.id;
+  const mastery = getPackageMastery(selected);
+
+  document.getElementById('active-group').textContent = selected.group.title;
+  document.getElementById('active-title').textContent = selected.title;
+  document.getElementById('active-description').textContent = selected.description;
+  document.getElementById('active-status').textContent = formatState(mastery.state);
+  document.getElementById('active-percent').textContent = formatPercent(mastery.value);
+  document.getElementById('stage-kicker').textContent = selected.group.title;
+  document.getElementById('stage-heading').textContent = selected.title;
+
+  const activeMarker = document.getElementById('active-marker');
+  activeMarker.className = `state-marker ${mastery.state}`;
+
+  document.getElementById('stage-meta').innerHTML = [
+    `${selected.concepts.length} concepts`,
+    `${formatPercent(mastery.value)} mastery`,
+    formatState(mastery.state)
+  ].map(item => `<span class="meta-pill">${item}</span>`).join('');
+
+  renderPracticeControls(selected);
+  renderPracticeCard(selected);
+
+  document.getElementById('concept-items').innerHTML = selected.concepts.map(conceptId => {
+    const progress = getConceptProgress(conceptId);
+    const conceptState = progress.attempts > 0 ? getPackageMastery({ concepts: [conceptId] }).state : 'unseen';
+    return `
+      <div class="concept-item">
+        <span class="state-marker ${conceptState}" title="${formatState(conceptState)}"></span>
+        <span class="concept-name">${labelFromConceptId(conceptId)}</span>
+        <span class="concept-score">${formatPercent(progress.mastery)}</span>
+      </div>
+    `;
+  }).join('');
+}
+
+function selectPackage(packageId) {
+  state.activePackageId = packageId;
+  saveState();
+  render();
+}
+
+function render() {
+  renderSummary();
+  renderNav();
+  renderActivePackage();
+}
+
+let state = { activePackageId: null, progress: {}, phraseProgress: {}, practiceMode: 'word-to-image', exerciseIndexByPackage: {} };
+
+function scoreFixture() {
+  const initialProgress = {
+    di: createEmptyConceptProgress(),
+    'sviluppatore-software': createEmptyConceptProgress(),
+    lavoro: createEmptyConceptProgress(),
+    'fare-presente-tu': createEmptyConceptProgress(),
+    'essere-sono': createEmptyConceptProgress(),
+    occuparsi: createEmptyConceptProgress(),
+    'app-android': createEmptyConceptProgress()
+  };
+
+  const result = scoreExercise({
+    progress: initialProgress,
+    phraseProgress: {},
+    templateId: 'work_intro_01',
+    contextConceptIds: ['essere-sono', 'occuparsi', 'app-android'],
+    answers: [
+      { conceptId: 'sviluppatore-software', expected: 'sviluppatore software', answer: 'sviluppatore software' },
+      { conceptId: 'di', expected: 'di', answer: 'in' },
+      { conceptId: 'lavoro', expected: 'lavoro', answer: 'lavoro' },
+      { conceptId: 'fare-presente-tu', expected: 'fai', answer: 'fai' }
+    ],
+    timestamp: '2026-05-06T10:10:00.000Z'
+  });
+
+  const diProgress = result.progress.di;
+  const phrase = result.phraseProgress.work_intro_01;
+  const orderCheck = scoreExercise({
+    progress: {
+      first: createEmptyConceptProgress(),
+      second: createEmptyConceptProgress(),
+      third: createEmptyConceptProgress()
+    },
+    phraseProgress: {},
+    templateId: 'ordering_check',
+    answers: [
+      { conceptId: 'first', expected: 'a', answer: 'a' },
+      { conceptId: 'second', expected: 'b', answer: 'x' },
+      { conceptId: 'third', expected: 'c', answer: 'c' }
+    ],
+    timestamp: '2026-05-06T10:11:00.000Z'
+  });
+  const zeroTargetCheck = scoreExercise({
+    progress: {},
+    phraseProgress: {},
+    templateId: 'zero_target',
+    answers: [],
+    timestamp: '2026-05-06T10:12:00.000Z'
+  });
+
+  return {
+    activeOnly: result.progress['essere-sono'].mastery === 0
+      && result.progress.occuparsi.mastery === 0
+      && result.progress['app-android'].mastery === 0
+      && result.progress['essere-sono'].seenInContext === 1
+      && result.progress.occuparsi.seenInContext === 1
+      && result.progress['app-android'].seenInContext === 1,
+    confusionRecorded: diProgress.confusions.in === 1 && diProgress.wrong === 1,
+    phraseMastered: phrase.mastery > 0,
+    allAnswersScored: orderCheck.progress.third.attempts === 1
+      && orderCheck.progress.third.correct === 1
+      && orderCheck.progress.second.wrong === 1,
+    zeroTargetRejected: zeroTargetCheck.allCorrect === false
+      && zeroTargetCheck.phraseProgress.zero_target.fullCorrect === 0
+      && zeroTargetCheck.phraseProgress.zero_target.mastery === 0
+  };
+}
+
+if (typeof window !== 'undefined') {
+  window.__TEST__ = {
+    scoreFixture,
+    imageManifest: VOCABULARY_IMAGE_MANIFEST
+  };
+}
+
+function boot() {
+  if (typeof document === 'undefined' || !document.getElementById('package-nav')) return;
+
+  state = loadState();
+  if (!state.activePackageId) {
+    state.activePackageId = getPackages()[0].id;
+  }
+
+  render();
+}
+
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading' && document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+}
+</script>
+</body>
+</html>

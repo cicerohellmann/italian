@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "repo": {
+    "name": "italian",
+    "purpose": "A static Italian study site with lesson notes, grammar reference, quiz practice, and future mastery-based exercises. AI governance matters here because most work changes learning content, scoring behavior, or generated study UI directly in a single HTML surface."
+  },
+  "executionPaths": {
+    "Implementation": {
+      "allows": [
+        "edit_docs",
+        "edit_code",
+        "edit_tests",
+        "edit_assets"
+      ],
+      "forbids": [
+        "commit",
+        "push"
+      ]
+    },
+    "Review": {
+      "allows": [
+        "inspect",
+        "report_findings"
+      ],
+      "forbids": [
+        "edit_docs",
+        "edit_code",
+        "edit_tests",
+        "commit",
+        "push"
+      ]
+    },
+    "Checkpoint": {
+      "allows": [
+        "stage",
+        "commit",
+        "push"
+      ],
+      "forbids": [
+        "new_implementation"
+      ]
+    }
+  },
+  "targets": [
+    {
+      "name": "Static Study App",
+      "paths": [
+        "index.html"
+      ],
+      "owns": [
+        "Italian study UI",
+        "lesson content and grammar reference",
+        "quiz and practice behavior",
+        "client-side app state",
+        "static styling and responsive layout"
+      ],
+      "doesNotOwn": [
+        "AI governance policy",
+        "generated governance documentation",
+        "repository publishing workflow"
+      ],
+      "allowedDependencies": []
+    },
+    {
+      "name": "AI Governance",
+      "paths": [
+        ".ai-governance-harness/",
+        "AGENTS.md",
+        "docs/ai/"
+      ],
+      "owns": [
+        "repo-specific AI execution policy",
+        "implementation/review/checkpoint contracts",
+        "ownership map and verification rules",
+        "generated AI governance documentation"
+      ],
+      "doesNotOwn": [
+        "Italian study UI behavior",
+        "lesson content",
+        "quiz scoring behavior"
+      ],
+      "allowedDependencies": []
+    }
+  ],
+  "ambiguities": [
+    {
+      "term": "app",
+      "meaning": "Usually means the static study UI in index.html; confirm before changing governance docs or publishing workflow."
+    },
+    {
+      "term": "website",
+      "meaning": "Could mean the existing guide in index.html or a new standalone page; confirm whether to edit existing content or create a separate file."
+    },
+    {
+      "term": "exercise",
+      "meaning": "Could mean quiz data, generated practice behavior, mastery scoring, or static lesson examples; clarify the intended exercise type before broad implementation."
+    },
+    {
+      "term": "commit and push",
+      "meaning": "This is Checkpoint path work only; do not add fresh implementation while checkpointing."
+    }
+  ],
+  "verification": [
+    {
+      "scope": "index.html",
+      "requires": [
+        "script_syntax_check",
+        "static_panel_reference_check",
+        "manual_or_browser_smoke_for_ui_changes"
+      ]
+    },
+    {
+      "scope": ".ai-governance-harness/",
+      "requires": [
+        "harness_validate",
+        "harness_render_check"
+      ]
+    },
+    {
+      "scope": "docs/ai/",
+      "requires": [
+        "harness_validate",
+        "consistency_check"
+      ]
+    }
+  ],
+  "trackers": []
+}
